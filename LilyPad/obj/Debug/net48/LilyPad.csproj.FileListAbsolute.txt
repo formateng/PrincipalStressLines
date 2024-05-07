@@ -1,0 +1,13 @@
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.AssemblyReference.cache
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfoInputs.cache
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfo.cs
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.CoreCompileInputs.cache
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.sourcelink.json
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\bin\Debug\net48\LilyPad.gha
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\bin\Debug\net48\LilyPad.pdb
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\bin\Debug\net48\MathNet.Numerics.dll
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\bin\Debug\net48\Triangle.dll
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.Up2Date
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.gha
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.pdb

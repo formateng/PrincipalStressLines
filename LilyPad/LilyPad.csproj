@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Version>1.0</Version>
+    <Title>LilyPad</Title>
+    <Description>Description of LilyPad</Description>
+    <TargetExt>.gha</TargetExt>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Grasshopper" Version="6.35.21222.17001" IncludeAssets="compile;build" />
+    <PackageReference Include="MathNet.Numerics" Version="4.8.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Triangle">
+      <HintPath>triangleNET\Triangle.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
