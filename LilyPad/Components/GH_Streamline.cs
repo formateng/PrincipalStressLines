@@ -9,7 +9,7 @@ namespace Streamlines.NthOrder
     public class GH_StreamlineVectorMesh : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_StreamlinePrincipalMesh class.
+        /// Initializes a new instance of the GH_StreamlineVectorMesh class.
         /// </summary>
         public GH_StreamlineVectorMesh()
           : base("Streamline", "Streamline",
@@ -44,6 +44,8 @@ namespace Streamlines.NthOrder
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            Grasshopper.Kernel.Types.GH_ObjectWrapper objWrapPrinciMesh = new Grasshopper.Kernel.Types.GH_ObjectWrapper();
+
             PrincipalMesh iPrincipalMesh = new PrincipalMesh();
             Point3d iSeed = new Point3d();
             double iStepSize = 0.0;
@@ -51,11 +53,14 @@ namespace Streamlines.NthOrder
             double iMaxAngle = 0.0;
 
 
-            DA.GetData(0, ref iPrincipalMesh);
+            DA.GetData(0, ref objWrapPrinciMesh);
             DA.GetData(1, ref iSeed);
             DA.GetData(2, ref iStepSize);
             DA.GetData(3, ref iMethod);
             DA.GetData(4, ref iMaxAngle);
+
+            if (objWrapPrinciMesh != null)
+                iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;
 
             //_________________________________________________________________________________
             Streamlines streamlines = new Streamlines(iPrincipalMesh);
