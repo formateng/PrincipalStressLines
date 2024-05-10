@@ -7,39 +7,38 @@ using Rhino.Geometry;
 
 namespace Streamlines.NthOrder
 {
-    public class GH_EvaluateVectorMesh : GH_Component
+    public class GH_EvaluatePrincipalMesh : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the GH_EvaluatePrincipalMesh class.
+        /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_EvaluateVectorMesh()
+        public GH_EvaluatePrincipalMesh()
           : base("Evaluate principal Mesh", "Eval",
               "Evaluates the principal direction at any point in the mesh",
-              "Streamlines", "Analysis")
+              "LilyPad", "Setup")
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
+        /// Register all input parameters.
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Principal", "M", "Principal mesh to evaluate", GH_ParamAccess.item);
             pManager.AddPointParameter("Location", "P", "Location at which to evalutate the principal mesh", GH_ParamAccess.item);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
+        /// Register all input parameters.
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddVectorParameter("Vector", "V", "Weighted average vector", GH_ParamAccess.item);
         }
 
+
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Assign parameter inputs
+        /// run evaluate method of principalMesh and check for errors
+        /// assign resulting vector to the output parameter
         /// </summary>
-        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Grasshopper.Kernel.Types.GH_ObjectWrapper objWrapPrinciMesh = new Grasshopper.Kernel.Types.GH_ObjectWrapper();
@@ -65,9 +64,7 @@ namespace Streamlines.NthOrder
 
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
@@ -78,9 +75,7 @@ namespace Streamlines.NthOrder
             }
         }
 
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
+        /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
             get { return new Guid("f9e23d6a-368e-4d72-bf6f-6b52fe0220d7"); }
