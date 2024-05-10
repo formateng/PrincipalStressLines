@@ -11,3 +11,5 @@ C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\bin\Debug\net48\Triangle.dll
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.Up2Date
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.gha
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.pdb
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.ResourceIcons.resources
+C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.GenerateResource.cache
