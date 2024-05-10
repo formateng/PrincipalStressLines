@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_streamline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_streamline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\shapefunction\\gh_mindlinreissnerquadraticisopara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:shapefunction\\gh_mindlinreissnerquadraticisopara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_testingbilinearisopara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_testingbilinearisopara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\lilypad.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:lilypad.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_lilypadcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_lilypadcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,87 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 205,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GH_Streamline.cs",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Streamline.cs",
-              "RelativeDocumentMoniker": "Components\\GH_Streamline.cs",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Streamline.cs",
-              "RelativeToolTip": "Components\\GH_Streamline.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAcAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T15:43:07.029Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GH_MindlinReissnerQuadraticIsoPara.cs",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\ShapeFunction\\GH_MindlinReissnerQuadraticIsoPara.cs",
-              "RelativeDocumentMoniker": "ShapeFunction\\GH_MindlinReissnerQuadraticIsoPara.cs",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\ShapeFunction\\GH_MindlinReissnerQuadraticIsoPara.cs",
-              "RelativeToolTip": "ShapeFunction\\GH_MindlinReissnerQuadraticIsoPara.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAIwCYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T16:42:43.774Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GH_TestingBilinearIsoPara.cs",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_TestingBilinearIsoPara.cs",
-              "RelativeDocumentMoniker": "Components\\GH_TestingBilinearIsoPara.cs",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_TestingBilinearIsoPara.cs",
-              "RelativeToolTip": "Components\\GH_TestingBilinearIsoPara.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T16:41:56.445Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LilyPad",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\LilyPad.csproj",
-              "RelativeDocumentMoniker": "LilyPad.csproj",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\LilyPad.csproj",
-              "RelativeToolTip": "LilyPad.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-05-07T16:13:17.278Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "GH_Evaluate.cs",
               "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Evaluate.cs",
               "RelativeDocumentMoniker": "Components\\GH_Evaluate.cs",
               "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Evaluate.cs",
               "RelativeToolTip": "Components\\GH_Evaluate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwDUAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T15:54:29.785Z"
+              "WhenOpened": "2024-05-10T09:44:39.314Z",
+              "EditorCaption": ""
             },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GH_LilyPadComponent.cs",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_LilyPadComponent.cs",
-              "RelativeDocumentMoniker": "Components\\GH_LilyPadComponent.cs",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_LilyPadComponent.cs",
-              "RelativeToolTip": "Components\\GH_LilyPadComponent.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAowAQAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T15:51:45.606Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 195,
-          "SelectedChildIndex": 0,
-          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -127,7 +41,7 @@
               "RelativeDocumentMoniker": "Components\\GH_Streamlines.cs",
               "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Streamlines.cs",
               "RelativeToolTip": "Components\\GH_Streamlines.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAAAAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAwwEMAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-08T16:09:57.117Z",
               "EditorCaption": ""

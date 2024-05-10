@@ -42,11 +42,16 @@ namespace Streamlines.NthOrder
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            Grasshopper.Kernel.Types.GH_ObjectWrapper objWrapPrinciMesh = new Grasshopper.Kernel.Types.GH_ObjectWrapper();
+
             PrincipalMesh iPrincipalMesh = new PrincipalMesh();
             Point3d iLocation = new Point3d();
 
-            DA.GetData(0, ref iPrincipalMesh);
+            DA.GetData(0, ref objWrapPrinciMesh);
             DA.GetData(1, ref iLocation);
+
+            if (objWrapPrinciMesh != null)
+                iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;
 
             //_________________________________________________________________________________
 

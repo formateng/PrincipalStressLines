@@ -59,7 +59,7 @@ namespace Streamlines.NthOrder
             double iDSep = 0.0;
             double iDTest = 0.0;
 
-            DA.GetData(0, ref iPrincipalMesh);
+            DA.GetData(0, ref objWrapPrinciMesh);
             DA.GetData(1, ref iSeed);
             DA.GetData(2, ref iStepSize);
             DA.GetData(3, ref iMethod);
@@ -67,6 +67,9 @@ namespace Streamlines.NthOrder
             DA.GetData(5, ref iStrategy);
             DA.GetData(6, ref iDSep);
             DA.GetData(7, ref iDTest);
+
+            if (objWrapPrinciMesh != null)
+                iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;
 
             //_________________________________________________________________________________
             Streamlines streamlines = new Streamlines(iPrincipalMesh);
