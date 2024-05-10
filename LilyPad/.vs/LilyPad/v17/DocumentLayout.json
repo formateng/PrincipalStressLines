@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_stresslines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_stresslines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:components\\gh_evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 205,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GH_StressLines.cs",
+              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_StressLines.cs",
+              "RelativeDocumentMoniker": "Components\\GH_StressLines.cs",
+              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_StressLines.cs",
+              "RelativeToolTip": "Components\\GH_StressLines.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T16:09:57.117Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "791ec205-b371-4d0e-b59a-0d8dd07b26ce",
+        "Display": 1,
+        "X": 234,
+        "Y": 854,
+        "Width": 1578,
+        "Height": 792,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "GH_Evaluate.cs",
               "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Evaluate.cs",
               "RelativeDocumentMoniker": "Components\\GH_Evaluate.cs",
               "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Evaluate.cs",
               "RelativeToolTip": "Components\\GH_Evaluate.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAIwEgAAAA5AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-10T09:44:39.314Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GH_Streamlines.cs",
-              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Streamlines.cs",
-              "RelativeDocumentMoniker": "Components\\GH_Streamlines.cs",
-              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Components\\GH_Streamlines.cs",
-              "RelativeToolTip": "Components\\GH_Streamlines.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowDwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T16:09:57.117Z",
               "EditorCaption": ""
             }
           ]

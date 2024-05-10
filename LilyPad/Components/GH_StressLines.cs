@@ -6,15 +6,16 @@ using Rhino.Geometry;
 
 namespace Streamlines.NthOrder
 {
-    public class GH_StreamlinesVectorMesh : GH_Component
+    public class GH_StressLines : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_StreamlinesPrincipalMesh class.
+        /// Initializes a new instance of the GH_StressLines class.
+        /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_StreamlinesVectorMesh()
-          : base("Streamlines", "Streamlines",
-              "Creates a series of streamlines on the principal mesh",
-              "Streamlines", "Analysis")
+        public GH_StressLines()
+          : base("Stress Lines", "SLs",
+              "Creates a series of stress lines on the principal mesh",
+              "LilyPad", "Results")
         {
         }
 
