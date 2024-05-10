@@ -5,25 +5,26 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Grasshopper.Kernel.Expressions;
 using Rhino.Collections;
+using LilyPad.Objects;
+using LilyPad.Objects.ShapeFunction;
 
-namespace Streamlines.ShapeFunction
+namespace LilyPad.Components.Setup
 {
-    public class GH_MindlinReissnerQuadraticIsoPara : GH_Component
+    public class GH_MindlinReissnerQuad8 : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_BilinearRectangle class.
+        /// Initializes a new instance of the GH_MindlinReissnerQuad8 class.
+        /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_MindlinReissnerQuadraticIsoPara()
-          : base("8 Node Isoparametric Slab", "8IsoparaSlab",
-              "Transforms Mesh and results into 8-node isoparametric (i.e. any quadrilateral shape) slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Bilinear shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
-              "Streamlines", "ShapeFunction")
+        public GH_MindlinReissnerQuad8()
+          : base("8 Node Quad Slab", "Quad8Slab",
+              "Transforms Mesh and results into 8-node quad slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Quadratic shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
+              "LilyPad", "Setup")
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        /// Register all input parameters.
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddMeshParameter("Mesh", "M", "Mesh", GH_ParamAccess.item);
             pManager.AddPointParameter("Mid-Nodes", "md", "Mid-node locations as a list of points", GH_ParamAccess.list);
@@ -32,19 +33,17 @@ namespace Streamlines.ShapeFunction
             pManager.AddNumberParameter("Poisson's ratio", "v", "Poisson's ratio", GH_ParamAccess.item);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        /// Register all output parameters.
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Principle Direction 1", "P1", "A vector field showing the first principle direction", GH_ParamAccess.item);
             pManager.AddGenericParameter("Principle Direction 2", "P2", "A vector field showing the second principle direction", GH_ParamAccess.item);
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Uses the provided mesh to create a series of quad 8 elements
+        /// Assembles list of elements into two principal meshes one for each direction
         /// </summary>
-        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Mesh iMesh = new Mesh();
@@ -78,10 +77,10 @@ namespace Streamlines.ShapeFunction
                 Point3d point6 = iMesh.Vertices[p6];
                 Point3d point8 = iMesh.Vertices[p8];
 
-                Point3d point2 = (point1 + point3)/2;
-                Point3d point4 = (point1 + point6)/2;
-                Point3d point5 = (point3 + point8)/2;
-                Point3d point7 = (point6 + point8)/2;
+                Point3d point2 = (point1 + point3) / 2;
+                Point3d point4 = (point1 + point6) / 2;
+                Point3d point5 = (point3 + point8) / 2;
+                Point3d point7 = (point6 + point8) / 2;
 
                 Point3dList midPoints = new Point3dList(iMd);
                 int p2 = midPoints.ClosestIndex(point2);
@@ -89,6 +88,7 @@ namespace Streamlines.ShapeFunction
                 int p5 = midPoints.ClosestIndex(point5);
                 int p7 = midPoints.ClosestIndex(point7);
 
+                //alter vectors so they are in the "mathematical form" rather than the right-hand rule
                 Vector3d U1 = new Vector3d(iφc[p1].Y, -iφc[p1].X, 0.0);
                 Vector3d U2 = new Vector3d(iφmd[p2].Y, -iφmd[p2].X, 0.0);
                 Vector3d U3 = new Vector3d(iφc[p3].Y, -iφc[p3].X, 0.0);
@@ -99,16 +99,16 @@ namespace Streamlines.ShapeFunction
                 Vector3d U8 = new Vector3d(iφc[p8].Y, -iφc[p8].X, 0.0);
 
                 //Create and analyse elements
-                QuadraticIsoPara quadraticIsoPara1 = new QuadraticIsoPara(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
+                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
 
                 //output data
                 quadraticIsoPara1.ChangeDirection(1);
-                sigma1.Add( new Element(quadraticIsoPara1));
+                sigma1.Add(new Element(quadraticIsoPara1));
 
-                QuadraticIsoPara quadraticIsoPara2 = new QuadraticIsoPara(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
+                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
 
                 quadraticIsoPara2.ChangeDirection(2);
-                sigma2.Add( new Element(quadraticIsoPara2));
+                sigma2.Add(new Element(quadraticIsoPara2));
             }
 
             //Creates FieldMesh data for output
@@ -126,9 +126,7 @@ namespace Streamlines.ShapeFunction
             DA.SetData(1, oSigma2);
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
@@ -139,9 +137,7 @@ namespace Streamlines.ShapeFunction
             }
         }
 
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
+        /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
             get { return new Guid("48dde900-f69b-42a1-9255-298eea3ebfcb"); }

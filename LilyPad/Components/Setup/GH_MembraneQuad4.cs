@@ -4,52 +4,51 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Grasshopper.Kernel.Expressions;
+using LilyPad.Objects;
+using LilyPad.Objects.ShapeFunction;
 
-namespace Streamlines.ShapeFunction
+namespace LilyPad.Components.Setup
 {
-    public class GH_MindlinReissnerBilinearIsoPara : GH_Component
+    public class GH_MembraneQuad4 : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_BilinearRectangle class.
+        /// Initializes a new instance of the GH_MembraneQuad4 class.
+        /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_MindlinReissnerBilinearIsoPara()
-          : base("4 Node Isoparametric Slab", "4IsoparaSlab",
-              "Transforms Mesh and results into 4-node isoparametric (i.e. any quadrilateral shape) slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Bilinear shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
-              "Streamlines", "ShapeFunction")
+        public GH_MembraneQuad4()
+          : base("4 Node Quad Membrane", "Quad4Mem",
+              "Transforms Mesh and results into 4-node quad membrane elements for principal stress line analysis using the theory of in-plane loaded plates and Bilinear shape functions",
+              "LilyPad", "Setup")
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        /// Register all input parameters.
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddMeshParameter("Mesh", "M", "Mesh", GH_ParamAccess.item);
-            pManager.AddVectorParameter("Rotations", "φ", "Rotational vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Displacments", "U", "Displacement vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
             pManager.AddNumberParameter("Poisson's ratio", "v", "Poisson's ratio", GH_ParamAccess.item);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        /// Register all output parameters.
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Principle Direction 1", "P1", "A vector field showing the first principle direction", GH_ParamAccess.item);
             pManager.AddGenericParameter("Principle Direction 2", "P2", "A vector field showing the second principle direction", GH_ParamAccess.item);
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Uses the provided mesh to create a series of quad 4 elements
+        /// Assembles list of elements into two principal meshes one for each direction
         /// </summary>
-        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Mesh iMesh = new Mesh();
-            List<Vector3d> iφ = new List<Vector3d>();
+            List<Vector3d> iU = new List<Vector3d>();
             double iV = 0.0;
 
             DA.GetData(0, ref iMesh);
-            DA.GetDataList(1, iφ);
+            DA.GetDataList(1, iU);
             DA.GetData(2, ref iV);
 
             //________________________________________________________________________________________________________________________
@@ -61,28 +60,22 @@ namespace Streamlines.ShapeFunction
             for (int i = 0; i < iMesh.Faces.Count; i++)
             {
                 MeshFace face = iMesh.Faces[i];
-
                 int p1 = face[0];
                 int p2 = face[1];
                 int p3 = face[3];
                 int p4 = face[2];
 
-                Vector3d U1 = new Vector3d(iφ[p1].Y, -iφ[p1].X, 0.0);
-                Vector3d U2 = new Vector3d(iφ[p2].Y, -iφ[p2].X, 0.0);
-                Vector3d U3 = new Vector3d(iφ[p3].Y, -iφ[p3].X, 0.0);
-                Vector3d U4 = new Vector3d(iφ[p4].Y, -iφ[p4].X, 0.0);
-
                 //Create and analyse elements
-                BilinearIsoPara bilinearIsoPara1 = new BilinearIsoPara(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara1 = new Quad4Element(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], iU[p1], iU[p2], iU[p3], iU[p4], iV);
 
                 //output data
                 bilinearIsoPara1.ChangeDirection(1);
-                sigma1.Add( new Element(bilinearIsoPara1));
+                sigma1.Add(new Element(bilinearIsoPara1));
 
-                BilinearIsoPara bilinearIsoPara2 = new BilinearIsoPara(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara2 = new Quad4Element(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], iU[p1], iU[p2], iU[p3], iU[p4], iV);
 
                 bilinearIsoPara2.ChangeDirection(2);
-                sigma2.Add( new Element(bilinearIsoPara2));
+                sigma2.Add(new Element(bilinearIsoPara2));
             }
 
             //Creates FieldMesh data for output
@@ -100,9 +93,7 @@ namespace Streamlines.ShapeFunction
             DA.SetData(1, oSigma2);
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
@@ -113,12 +104,10 @@ namespace Streamlines.ShapeFunction
             }
         }
 
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
+        /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
-            get { return new Guid("78ddf910-f69b-42a1-9255-298eea3ebfcb"); }
+            get { return new Guid("68ddf900-f69b-42a1-9255-298eea3ebfcb"); }
         }
     }
 }

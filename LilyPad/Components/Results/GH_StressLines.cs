@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 
 using Grasshopper.Kernel;
+using LilyPad.Objects;
 using Rhino.Geometry;
 
-namespace Streamlines.NthOrder
+namespace LilyPad.Components.Results
 {
     public class GH_StressLines : GH_Component
     {
@@ -19,10 +20,8 @@ namespace Streamlines.NthOrder
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        /// Register all input parameters.
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Principal Mesh", "Mesh", "Principal mesh to analyse", GH_ParamAccess.item);
             pManager.AddPointParameter("Seed", "S", "Point which the streamline passes through", GH_ParamAccess.item);
@@ -34,18 +33,18 @@ namespace Streamlines.NthOrder
             pManager.AddNumberParameter("Test Dist.", "dTest", "The distance which a streamline is ended if it is closer than this distance to a existing streamline, this is only applied if the specified value is >0", GH_ParamAccess.item);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        /// Register all output parameters.
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Streamlines", "S", "Steamlines", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Stress Lines", "Ss", "Generated stress lines", GH_ParamAccess.list);
         }
 
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Assign parameter inputs
+        /// create streamlines object using principalMesh as input
+        /// create stress lines using CreateStreamLines method of stresslines
+        /// assign stress lines to the output parameter
         /// </summary>
-        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Grasshopper.Kernel.Types.GH_ObjectWrapper objWrapPrinciMesh = new Grasshopper.Kernel.Types.GH_ObjectWrapper();
@@ -75,17 +74,15 @@ namespace Streamlines.NthOrder
             //_________________________________________________________________________________
             Streamlines streamlines = new Streamlines(iPrincipalMesh);
 
-            List<Polyline> oStreamlines = streamlines.CreateStreamlines(iSeed, iStepSize, Convert.ToInt32(iMethod), Convert.ToInt32(iStrategy), iDSep, iDTest, iMaxAngle);
+            List<Polyline> oStressLines = streamlines.CreateStreamlines(iSeed, iStepSize, Convert.ToInt32(iMethod), Convert.ToInt32(iStrategy), iDSep, iDTest, iMaxAngle);
 
             //___________________________________________________________________________________
 
-            DA.SetDataList(0, oStreamlines);
+            DA.SetDataList(0, oStressLines);
 
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
@@ -96,9 +93,7 @@ namespace Streamlines.NthOrder
             }
         }
 
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
+        /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
             get { return new Guid("31cc7a61-5877-4d3e-8627-3d653e415f54"); }

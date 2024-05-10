@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 
 using Grasshopper.Kernel;
+using LilyPad.Objects;
 using Rhino.Geometry;
 
-namespace Streamlines.NthOrder
+namespace LilyPad.Components.Results
 {
-    public class GH_StreamlineVectorMesh : GH_Component
+    public class GH_StressLine : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_StreamlineVectorMesh class.
+        /// Initializes a new instance of the GH_StressLine class.
+        /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_StreamlineVectorMesh()
-          : base("Streamline", "Streamline",
-              "Creates a streamline on the principal mesh",
-              "Streamlines", "Analysis")
+        public GH_StressLine()
+          : base("Stress Line", "Stress Line",
+              "Creates a stress line on the principal mesh",
+              "LilyPad", "Results")
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        /// Register all input parameters.
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Principal Mesh", "Mesh", "Principal mesh to analyse", GH_ParamAccess.item);
             pManager.AddPointParameter("Seed", "S", "Point which the streamline passes through", GH_ParamAccess.item);
@@ -30,18 +30,19 @@ namespace Streamlines.NthOrder
             pManager.AddNumberParameter("Max. Error", "Err", "If value > 0 then an adaptive step procedure is used where the step size is decreased if the estimated integration error is more than the specified value", GH_ParamAccess.item, 0.5 * Math.PI);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        /// Register all output parameters.
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Streamline", "S", "Steamline", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Stress Line", "S", "Generated Stress Line", GH_ParamAccess.item);
         }
 
+
         /// <summary>
-        /// This is the method that actually does the work.
+        /// Assign parameter inputs
+        /// create streamlines object using principalMesh as input
+        /// create stress line using CreateStreamLines method of stresslines
+        /// assign stress line to the output parameter
         /// </summary>
-        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Grasshopper.Kernel.Types.GH_ObjectWrapper objWrapPrinciMesh = new Grasshopper.Kernel.Types.GH_ObjectWrapper();
@@ -65,17 +66,15 @@ namespace Streamlines.NthOrder
             //_________________________________________________________________________________
             Streamlines streamlines = new Streamlines(iPrincipalMesh);
 
-            Polyline oStreamline = streamlines.CreateStreamline(iSeed, iStepSize, Convert.ToInt32(iMethod), iMaxAngle, 0.0);
+            Polyline oStressLine = streamlines.CreateStreamline(iSeed, iStepSize, Convert.ToInt32(iMethod), iMaxAngle, 0.0);
 
             //___________________________________________________________________________________
 
-            DA.SetData(0, oStreamline);
+            DA.SetData(0, oStressLine);
 
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
+        /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
@@ -86,9 +85,7 @@ namespace Streamlines.NthOrder
             }
         }
 
-        /// <summary>
-        /// Gets the unique ID for this component. Do not change this ID after release.
-        /// </summary>
+        /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
             get { return new Guid("25100798-02f9-4904-a668-22e705710ebf"); }

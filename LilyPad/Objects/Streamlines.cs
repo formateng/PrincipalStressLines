@@ -8,7 +8,7 @@ using Rhino.Geometry;
 using TriangleNet;
 using TriangleNet.Data;
 
-namespace Streamlines
+namespace LilyPad.Objects
 {
     class Streamlines
     {
@@ -126,7 +126,7 @@ namespace Streamlines
             Error = SolveStep(Point, out End, Method, direction);
             Vec0 = End - Point;
             Vec0 = Vec0 / Vec0.Length;
-            Vector3d vecFirst = Vec0*direction;
+            Vector3d vecFirst = Vec0 * direction;
 
             int i = 0;
             while (test)
@@ -148,7 +148,7 @@ namespace Streamlines
                         edge.ToNurbsCurve().ClosestPoints(edgeSegment.ToNurbsCurve(), out End, out Point3d point3);
                     }
                 }
-                if (!test && Point.DistanceTo(End)>0.0001) streamlineSegment.Add(End);
+                if (!test && Point.DistanceTo(End) > 0.0001) streamlineSegment.Add(End);
 
                 //Only run rest of script if the solvestep has 
                 if (test)
@@ -165,7 +165,7 @@ namespace Streamlines
                     if (MaxError > 0)
                     {
                         //decrease step size
-                        if ((Error > MaxError || angle > 0.1* Math.PI) && level < 7)
+                        if ((Error > MaxError || angle > 0.1 * Math.PI) && level < 7)
                         {
                             //make the stepsize smaller
                             StepSize /= 2;
@@ -178,7 +178,7 @@ namespace Streamlines
                             Vec0 = Vec0 / Vec0.Length;
                         }
                         //increase step size
-                        else if ((Error < MaxError / 2 && angle < 0.05 * Math.PI) && level > 0 && track1 + 1 != i)
+                        else if (Error < MaxError / 2 && angle < 0.05 * Math.PI && level > 0 && track1 + 1 != i)
                         {
                             //make the stepsize larger
                             StepSize *= 2;
@@ -191,7 +191,7 @@ namespace Streamlines
                         //test to see if 180 degree fliping has occurred and only flip it if the level is up to 7
                         else if (angle > Math.PI * 0.7)
                         {
-                            if(level == 7)
+                            if (level == 7)
                             {
                                 direction *= -1;
                                 Vec1 = -Vec1;
@@ -231,7 +231,7 @@ namespace Streamlines
                     }
 
                     //test for looping stressline
-                    if (streamlineSegment.Length > 3*IStepSize && End.DistanceTo(streamlineSegment[0]) < StepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1*Math.PI)
+                    if (streamlineSegment.Length > 3 * IStepSize && End.DistanceTo(streamlineSegment[0]) < StepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1 * Math.PI)
                     {
                         streamlineSegment.Add(streamlineSegment[0]);
                         return streamlineSegment;
@@ -368,9 +368,9 @@ namespace Streamlines
 
                         //offset pt by the streamline direction rotated by 90 degrees in both directions
                         streamlineDirection.Rotate(Math.PI / 2, Mesh.FaceNormals[meshPt.FaceIndex]); ;
-                        Point3d seed1 = pt + (streamlineDirection / streamlineDirection.Length) * dSep;
+                        Point3d seed1 = pt + streamlineDirection / streamlineDirection.Length * dSep;
                         streamlineDirection.Rotate(Math.PI, Mesh.FaceNormals[meshPt.FaceIndex]); ;
-                        Point3d seed2 = pt + (streamlineDirection / streamlineDirection.Length) * dSep;
+                        Point3d seed2 = pt + streamlineDirection / streamlineDirection.Length * dSep;
 
                         //move seeds onto the mesh
                         seed1 = Mesh.ClosestPoint(seed1);
@@ -423,17 +423,17 @@ namespace Streamlines
                 boundPoints.Add(boundary.PointAtEnd);
                 boundPoints.Insert(0, boundary.PointAtStart);
                 Polyline boundPolyline = new Polyline(boundPoints);
-                
+
 
                 // Triangulate boundary polyline
                 TriangleNet.Mesh tmesh = Triangulate(boundPolyline);
 
-                List<Circle> circles = default(List<Circle>);
+                List<Circle> circles = default;
 
                 for (int i = 0; i < 1000; i++) //REMOVE HARD STOP
                 {
                     //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline
-                    foreach (var vertex in tmesh.Vertices) {  CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
+                    foreach (var vertex in tmesh.Vertices) { CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
 
                     //generate streamline
                     activeStreamline = CreateStreamline(seed, stepSize, integrationMethod, maxError, dTest);
@@ -443,7 +443,7 @@ namespace Streamlines
                     //add streamline points into the delaunay mesh
                     for (int j = 1; j < activeStreamline.Count - 1; j++)
                     {
-                        vertex1 = new TriangleNet.Data.Vertex(activeStreamline[j].X, activeStreamline[j].Y);
+                        vertex1 = new Vertex(activeStreamline[j].X, activeStreamline[j].Y);
                         tmesh.InsertVertex(vertex1);
                     }
                     //Add seed to used seed list
@@ -510,14 +510,14 @@ namespace Streamlines
         {
             //evaluate start point
             Vector3d vectorAtStart = Evaluate(start);
-            Vector3d vectorFromStart = (vectorAtStart / vectorAtStart.Length) * StepSize * direction;
+            Vector3d vectorFromStart = vectorAtStart / vectorAtStart.Length * StepSize * direction;
 
             //find end point
             end = start + vectorFromStart;
 
             //evaluate end point
             Vector3d vectorAtEnd = Evaluate(end);
-            Vector3d vectorFromEnd = (vectorAtEnd / vectorAtEnd.Length) * StepSize * direction;
+            Vector3d vectorFromEnd = vectorAtEnd / vectorAtEnd.Length * StepSize * direction;
 
             //calculate error
             return ((vectorFromStart - vectorFromEnd) / 2).Length;
@@ -598,28 +598,28 @@ namespace Streamlines
 
             //find vector at the start
             Vector3d vectorAtStart = Evaluate(start);
-            Vector3d vectorFromStart = (vectorAtStart / vectorAtStart.Length) * (StepSize) * direction;
+            Vector3d vectorFromStart = vectorAtStart / vectorAtStart.Length * StepSize * direction;
 
             //find point1 and the vector at point1
             Point3d point1 = start + vectorFromStart / 2;
             Vector3d vectorAtPoint1 = Evaluate(point1);
             angle = Math.Abs(Vector3d.VectorAngle(vectorAtStart, vectorAtPoint1));
             if (angle > Math.PI * 0.75) vectorAtPoint1 = -vectorAtPoint1;
-            Vector3d vectorFromPoint1 = (vectorAtPoint1 / vectorAtPoint1.Length) * (StepSize) * direction;
+            Vector3d vectorFromPoint1 = vectorAtPoint1 / vectorAtPoint1.Length * StepSize * direction;
 
             //find vector k3
             Point3d point2 = start + vectorFromPoint1 / 2;
             Vector3d vectorAtPoint2 = Evaluate(point2);
             angle = Math.Abs(Vector3d.VectorAngle(vectorAtStart, vectorAtPoint2));
             if (angle > Math.PI * 0.75) vectorAtPoint2 = -vectorAtPoint2;
-            Vector3d vectorFromPoint2 = (vectorAtPoint2 / vectorAtPoint2.Length) * (StepSize) * direction;
+            Vector3d vectorFromPoint2 = vectorAtPoint2 / vectorAtPoint2.Length * StepSize * direction;
 
             //find vector k4
             Point3d point3 = start + vectorFromPoint2;
             Vector3d vectorAtPoint3 = Evaluate(point3);
             angle = Math.Abs(Vector3d.VectorAngle(vectorAtStart, vectorAtPoint3));
             if (angle > Math.PI * 0.75) vectorAtPoint3 = -vectorAtPoint3;
-            Vector3d vectorFromPoint3 = (vectorAtPoint3 / vectorAtPoint3.Length) * (StepSize) * direction;
+            Vector3d vectorFromPoint3 = vectorAtPoint3 / vectorAtPoint3.Length * StepSize * direction;
 
             //find final location
             end = start + (vectorFromStart + 2 * vectorFromPoint1 + 2 * vectorFromPoint2 + vectorFromPoint3) / 6;
@@ -628,7 +628,7 @@ namespace Streamlines
             Vector3d vectorAtEnd = Evaluate(end);
             angle = Math.Abs(Vector3d.VectorAngle(vectorAtStart, vectorAtEnd));
             if (angle > Math.PI * 0.75) vectorAtEnd = -vectorAtEnd;
-            Vector3d vectorFromEnd = (vectorAtEnd / vectorAtEnd.Length) * (StepSize) * direction;
+            Vector3d vectorFromEnd = vectorAtEnd / vectorAtEnd.Length * StepSize * direction;
 
             return ((vectorFromPoint3 - vectorFromEnd) / 6).Length;
         }
@@ -650,7 +650,7 @@ namespace Streamlines
             // Add the points of the polyline into the geom
             for (int i = 0; i < poly.Count; i++)
             {
-                geom.AddPoint(Math.Round(poly[i].X,6), Math.Round(poly[i].Y,6));
+                geom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
             }
             // Create the connectivity between the points in geom
             for (int i = 0; i < poly.Count; i++)

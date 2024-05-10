@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 
 using Grasshopper.Kernel;
+using LilyPad.Objects;
 using Rhino.Geometry;
 
-namespace Streamlines.Components
+namespace LilyPad.Components.Results
 {
     public class GH_StresslineStructure : GH_Component
     {
@@ -14,14 +15,14 @@ namespace Streamlines.Components
         public GH_StresslineStructure()
           : base("Stressline Structure", "StressStruct",
               "Creates a stressline structure",
-              "Streamlines", "Construction")
+              "LilyPad", "Results")
         {
         }
 
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Principal Mesh 1", "M1", "Principal mesh of the first family", GH_ParamAccess.item);
             pManager.AddGenericParameter("Principal Mesh 2", "M2", "Principal mesh of the second family", GH_ParamAccess.item);
@@ -38,7 +39,7 @@ namespace Streamlines.Components
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
             pManager.AddCurveParameter("structure", "C", "Discretised structure in the form of polylines", GH_ParamAccess.list);
         }

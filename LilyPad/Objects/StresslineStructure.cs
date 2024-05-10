@@ -7,7 +7,7 @@ using Rhino.Geometry;
 using Rhino.Geometry.Intersect;
 using TriangleNet.Data;
 
-namespace Streamlines
+namespace LilyPad.Objects
 {
     class StresslineStructure
     {
@@ -65,7 +65,7 @@ namespace Streamlines
             Discretise();
 
             //loop for the number of iterations from the largest of the two values
-            for (int i = 0; i < Math.Max(iterations1,iterations2); i++)
+            for (int i = 0; i < Math.Max(iterations1, iterations2); i++)
             {
                 //Create new stress-lines using the points of largest deviation as the seeds
                 if (i < iterations1)
@@ -228,7 +228,7 @@ namespace Streamlines
             return locationOfLargestDevi;
         }
         */
-        
+
         private Point3d FindDeviation(int family)
         {
             List<Polyline> polylines = new List<Polyline>();
@@ -274,7 +274,7 @@ namespace Streamlines
                     //progressively sample 10 points all the segment and find the 2 points with the largest deviation and use them as the segments points in the next loop; loop ends when the change in deviation per loop is small.
                     double lastLoopDist = 1.0;
                     int count = 0;
-                    while(Math.Abs(lastLoopDist-segmentDist1)>0.001 && count<50)
+                    while (Math.Abs(lastLoopDist - segmentDist1) > 0.001 && count < 50)
                     {
                         lastLoopDist = segmentDist1;
                         stressLineSegement.Domain = new Interval(0.0, 1.0);
@@ -292,7 +292,7 @@ namespace Streamlines
                             double dist = pointOnPolyline.DistanceTo(pointOnStressLine);
 
                             //check if new points has a larger distance then the previously selected two largest points
-                            if(dist > segmentDist1)
+                            if (dist > segmentDist1)
                             {
                                 //replace the values of the 2nd largest with the first larges
                                 segmentDist2 = segmentDist1;
@@ -304,7 +304,7 @@ namespace Streamlines
                                 segmentpoint1 = pointOnStressLine;
                                 segmentParam1 = pointParams[j];
                             }
-                            else if(dist> segmentDist2)
+                            else if (dist > segmentDist2)
                             {
                                 //assign new 2nd largest values
                                 segmentDist2 = dist;
@@ -315,7 +315,7 @@ namespace Streamlines
                         }
 
                         //create new segment using the two points with the largest distance
-                        if(segmentParam1> segmentParam2)
+                        if (segmentParam1 > segmentParam2)
                         {
                             double store = segmentParam1;
                             segmentParam1 = segmentParam2;
@@ -328,7 +328,7 @@ namespace Streamlines
                     }
 
                     //if the larges deviation for the segment is greater than the largest deviation overall then replace the point with this one.
-                    if(segmentDist1 > largestDevi)
+                    if (segmentDist1 > largestDevi)
                     {
                         largestDevi = segmentDist1;
                         locationOfLargestDevi = segmentpoint1;

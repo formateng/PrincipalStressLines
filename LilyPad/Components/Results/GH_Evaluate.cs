@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 
 using Grasshopper.Kernel;
+using LilyPad.Objects;
 using Rhino.Geometry;
 
 
-namespace Streamlines.NthOrder
+namespace LilyPad.Components.Results
 {
     public class GH_EvaluatePrincipalMesh : GH_Component
     {
@@ -16,19 +17,19 @@ namespace Streamlines.NthOrder
         public GH_EvaluatePrincipalMesh()
           : base("Evaluate principal Mesh", "Eval",
               "Evaluates the principal direction at any point in the mesh",
-              "LilyPad", "Setup")
+              "LilyPad", "Results")
         {
         }
 
         /// Register all input parameters.
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Principal", "M", "Principal mesh to evaluate", GH_ParamAccess.item);
             pManager.AddPointParameter("Location", "P", "Location at which to evalutate the principal mesh", GH_ParamAccess.item);
         }
 
-        /// Register all input parameters.
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        /// Register all output parameters.
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
             pManager.AddVectorParameter("Vector", "V", "Weighted average vector", GH_ParamAccess.item);
         }

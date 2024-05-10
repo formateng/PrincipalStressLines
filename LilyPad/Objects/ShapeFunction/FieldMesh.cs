@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
 
-namespace Streamlines.ShapeFunction
+namespace LilyPad.Objects.ShapeFunction
 {
     class FieldMesh
     {
 
         //Properties
-        public Rhino.Geometry.Mesh Mesh;
+        public Mesh Mesh;
         public Polyline[] NakedEdges;
         public Plane MeshPlane;
         private List<Element> Elements;
@@ -19,13 +19,13 @@ namespace Streamlines.ShapeFunction
         //Constructors
         public FieldMesh()
         {
-            Rhino.Geometry.Mesh Mesh = new Rhino.Geometry.Mesh();
+            Mesh Mesh = new Mesh();
             NakedEdges = new Polyline[1];
             Elements = new List<Element>();
             MeshPlane = new Plane();
         }
 
-        public FieldMesh(List<Element> elements, Rhino.Geometry.Mesh mesh)
+        public FieldMesh(List<Element> elements, Mesh mesh)
         {
             Mesh = mesh;
             Elements = elements;
