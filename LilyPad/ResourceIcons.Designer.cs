@@ -63,6 +63,16 @@ namespace LilyPad {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconEvaluate_1 {
+            get {
+                object obj = ResourceManager.GetObject("IconEvaluate_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconMembraneQuad4 {
             get {
                 object obj = ResourceManager.GetObject("IconMembraneQuad4", resourceCulture);
@@ -73,9 +83,49 @@ namespace LilyPad {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconMembraneQuad8 {
+            get {
+                object obj = ResourceManager.GetObject("IconMembraneQuad8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconSlabQuad4 {
             get {
                 object obj = ResourceManager.GetObject("IconSlabQuad4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconSlabQuad8 {
+            get {
+                object obj = ResourceManager.GetObject("IconSlabQuad8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconStressLine {
+            get {
+                object obj = ResourceManager.GetObject("IconStressLine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconStressLines {
+            get {
+                object obj = ResourceManager.GetObject("IconStressLines", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
