@@ -11,7 +11,7 @@ namespace LilyPad
         public override string Name => "LilyPad";
 
         //Return a 24x24 pixel bitmap to represent this GHA library.
-        public override Bitmap Icon => ResourceIcons.LilyPadIcon24x24;
+        public override Bitmap Icon => ResourceIcons.LilyPadIcon24x24_02;
 
         //Return a short string describing the purpose of this GHA library.
         public override string Description => "";
@@ -28,7 +28,7 @@ namespace LilyPad
     {
         public override GH_LoadingInstruction PriorityLoad()
         {
-            Instances.ComponentServer.AddCategoryIcon("LilyPad", ResourceIcons.LilyPadIcon24x24);
+            Instances.ComponentServer.AddCategoryIcon("LilyPad", ResourceIcons.LilyPadIcon16x16_1);
             Instances.ComponentServer.AddCategorySymbolName("LilyPad", 'L');
             return GH_LoadingInstruction.Proceed;
         }

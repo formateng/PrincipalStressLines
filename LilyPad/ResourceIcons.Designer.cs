@@ -63,9 +63,69 @@ namespace LilyPad {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconMembraneQuad4 {
+            get {
+                object obj = ResourceManager.GetObject("IconMembraneQuad4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconSlabQuad4 {
+            get {
+                object obj = ResourceManager.GetObject("IconSlabQuad4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LilyPadIcon16x16 {
+            get {
+                object obj = ResourceManager.GetObject("LilyPadIcon16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LilyPadIcon16x16_1 {
+            get {
+                object obj = ResourceManager.GetObject("LilyPadIcon16x16_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LilyPadIcon24x24 {
             get {
                 object obj = ResourceManager.GetObject("LilyPadIcon24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LilyPadIcon24x24_01 {
+            get {
+                object obj = ResourceManager.GetObject("LilyPadIcon24x24_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LilyPadIcon24x24_02 {
+            get {
+                object obj = ResourceManager.GetObject("LilyPadIcon24x24_02", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
