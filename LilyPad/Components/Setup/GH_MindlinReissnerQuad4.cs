@@ -18,7 +18,7 @@ namespace LilyPad.Components.Setup
         public GH_MindlinReissnerQuad4()
           : base("4 Node Quad Slab", "Quad4Slab",
               "Transforms Mesh and results into 4-node quad slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Bilinear shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
-              "LilyPad", "Setup")
+              "LilyPad", " Setup")
         {
         }
 
@@ -113,6 +113,15 @@ namespace LilyPad.Components.Setup
         public override Guid ComponentGuid
         {
             get { return new Guid("78ddf910-f69b-42a1-9255-298eea3ebfcb"); }
+        }
+
+        ///Set component to be in the SECOND group of the sub-category
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
         }
     }
 }

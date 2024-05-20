@@ -24,7 +24,10 @@ namespace LilyPad
         //Return a string representing your preferred contact details.
         public override string AuthorContact => "";
     }
-    public class PufferfishCategoryIcon : GH_AssemblyPriority
+    /// <summary>
+    /// Add component icons
+    /// </summary>
+    public class LilyPadCategoryIcon : GH_AssemblyPriority
     {
         public override GH_LoadingInstruction PriorityLoad()
         {

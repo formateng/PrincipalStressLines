@@ -112,5 +112,16 @@ namespace LilyPad.Components.Results
         {
             get { return new Guid("fec05fcd-8128-487f-8309-5505909d3d71"); }
         }
+
+        /// <summary>
+        /// Hide component from the user as this is a work in progress
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
     }
 }

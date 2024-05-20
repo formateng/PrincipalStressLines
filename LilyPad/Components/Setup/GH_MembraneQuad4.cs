@@ -18,7 +18,7 @@ namespace LilyPad.Components.Setup
         public GH_MembraneQuad4()
           : base("4 Node Quad Membrane", "Quad4Mem",
               "Transforms Mesh and results into 4-node quad membrane elements for principal stress line analysis using the theory of in-plane loaded plates and Bilinear shape functions",
-              "LilyPad", "Setup")
+              "LilyPad", " Setup")
         {
         }
 
@@ -106,6 +106,15 @@ namespace LilyPad.Components.Setup
         public override Guid ComponentGuid
         {
             get { return new Guid("68ddf900-f69b-42a1-9255-298eea3ebfcb"); }
+        }
+
+        ///Set component to be in the FIRST group of the sub-category
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.primary;
+            }
         }
     }
 }

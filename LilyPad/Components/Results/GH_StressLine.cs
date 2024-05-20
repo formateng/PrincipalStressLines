@@ -88,5 +88,14 @@ namespace LilyPad.Components.Results
         {
             get { return new Guid("25100798-02f9-4904-a668-22e705710ebf"); }
         }
+
+        /// Set component to be in the SECOND group of the sub-category
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
+        }
     }
 }
