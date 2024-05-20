@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\resources\\iconevaluate_1.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:resources\\iconevaluate_1.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|c:\\users\\matthew\\documents\\github\\lilypad\\lilypad\\lilypadinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EE069C6-8698-4AC2-86C8-7CB3B9DAEDD3}|LilyPad.csproj|solutionrelative:lilypadinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,27 +27,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "IconEvaluate_1.png - PNG [24x24, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Resources\\IconEvaluate_1.png",
+              "RelativeDocumentMoniker": "Resources\\IconEvaluate_1.png",
+              "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\Resources\\IconEvaluate_1.png - PNG [24x24, 32 bit, PNG]",
+              "RelativeToolTip": "Resources\\IconEvaluate_1.png - PNG [24x24, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2024-05-20T14:50:27.77Z",
+              "EditorCaption": " - PNG [24x24, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "LilyPadInfo.cs",
               "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\LilyPadInfo.cs",
               "RelativeDocumentMoniker": "LilyPadInfo.cs",
               "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\LilyPadInfo.cs",
               "RelativeToolTip": "LilyPadInfo.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAA6AAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAB8AAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-13T17:21:24.415Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ResourceIcons.resx",
               "DocumentMoniker": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\ResourceIcons.resx",
               "RelativeDocumentMoniker": "ResourceIcons.resx",
               "ToolTip": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\ResourceIcons.resx",
               "RelativeToolTip": "ResourceIcons.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-05-10T19:33:01.605Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-10T19:33:01.605Z"
             }
           ]
         }

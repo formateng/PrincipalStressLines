@@ -7,6 +7,36 @@
     <Description>Description of LilyPad</Description>
     <TargetExt>.gha</TargetExt>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <None Remove="Resources\IconEvaluate_1.png" />
+    <None Remove="Resources\IconMembraneQuad4.png" />
+    <None Remove="Resources\IconMembraneQuad8.png" />
+    <None Remove="Resources\IconSlabQuad4.png" />
+    <None Remove="Resources\IconSlabQuad8.png" />
+    <None Remove="Resources\IconStressLine.png" />
+    <None Remove="Resources\IconStressLines.png" />
+    <None Remove="Resources\LilyPadIcon16x16.png" />
+    <None Remove="Resources\LilyPadIcon16x16_1.png" />
+    <None Remove="Resources\LilyPadIcon24x24.png" />
+    <None Remove="Resources\LilyPadIcon24x24_01.png" />
+    <None Remove="Resources\LilyPadIcon24x24_02.png" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\IconEvaluate_1.png" />
+    <EmbeddedResource Include="Resources\IconMembraneQuad4.png" />
+    <EmbeddedResource Include="Resources\IconMembraneQuad8.png" />
+    <EmbeddedResource Include="Resources\IconSlabQuad4.png" />
+    <EmbeddedResource Include="Resources\IconSlabQuad8.png" />
+    <EmbeddedResource Include="Resources\IconStressLine.png" />
+    <EmbeddedResource Include="Resources\IconStressLines.png" />
+    <EmbeddedResource Include="Resources\LilyPadIcon16x16.png" />
+    <EmbeddedResource Include="Resources\LilyPadIcon16x16_1.png" />
+    <EmbeddedResource Include="Resources\LilyPadIcon24x24.png" />
+    <EmbeddedResource Include="Resources\LilyPadIcon24x24_01.png" />
+    <EmbeddedResource Include="Resources\LilyPadIcon24x24_02.png" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Grasshopper" Version="6.35.21222.17001" IncludeAssets="compile;build" />
