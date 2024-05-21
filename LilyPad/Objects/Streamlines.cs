@@ -425,8 +425,8 @@ namespace LilyPad.Objects
                 Polyline boundPolyline = new Polyline(boundPoints);
 
 
-                // Triangulate boundary polyline
-                TriangleNet.Mesh tmesh = Triangulate(boundPolyline);
+                // InitialTriangulate boundary polyline
+                TriangleNet.Mesh tmesh = InitialTriangulate(boundPolyline);
 
                 List<Circle> circles = default;
 
@@ -438,14 +438,15 @@ namespace LilyPad.Objects
                     //generate streamline
                     activeStreamline = CreateStreamline(seed, stepSize, integrationMethod, maxError, dTest);
                     streamlines.Add(activeStreamline);
-                    Vertex vertex1 = new Vertex();
+/*                    Vertex vertex1 = new Vertex();*/
+                    tmesh = InsertStreamline(activeStreamline);
 
-                    //add streamline points into the delaunay mesh
+/*                    //add streamline points into the delaunay mesh
                     for (int j = 1; j < activeStreamline.Count - 1; j++)
                     {
-                        vertex1 = new Vertex(activeStreamline[j].X, activeStreamline[j].Y);
-                        tmesh.InsertVertex(vertex1);
-                    }
+                        vertex1 = new TriangleNet.Data.. Vertex(activeStreamline[j].X, activeStreamline[j].Y);
+                        bool test = tmesh.InsertVertex(vertex1);
+                    }*/
                     //Add seed to used seed list
                     UsedSeeds.Add(seed);
 
@@ -633,12 +634,13 @@ namespace LilyPad.Objects
             return ((vectorFromPoint3 - vectorFromEnd) / 6).Length;
         }
 
+        private TriangleNet.Geometry.InputGeometry TriGeom;
         /// <summary>
         /// Performs the initial triangulation of the boundary
         /// </summary>
         /// <param name="poly">A boundary polyline.</param>
         /// <returns>A delaunay triangulation.</returns>
-        private TriangleNet.Mesh Triangulate(Polyline poly)
+        private TriangleNet.Mesh InitialTriangulate(Polyline poly)
         {
             if (!poly.IsClosed)
             {
@@ -646,21 +648,47 @@ namespace LilyPad.Objects
             }
 
             // Create input geometry from perimeter polyline
-            var geom = new TriangleNet.Geometry.InputGeometry(poly.Count);
+            TriGeom = new TriangleNet.Geometry.InputGeometry();
             // Add the points of the polyline into the geom
             for (int i = 0; i < poly.Count; i++)
             {
-                geom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
+                TriGeom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
             }
             // Create the connectivity between the points in geom
             for (int i = 0; i < poly.Count; i++)
             {
-                geom.AddSegment(i, (i + 1) % poly.Count);
+                TriGeom.AddSegment(i, (i + 1) % poly.Count);
             }
 
             // Create triangulated mesh from input geometry
             var mesh = new TriangleNet.Mesh();
-            mesh.Triangulate(geom);
+            mesh.Triangulate(TriGeom);
+
+            return mesh;
+        }
+
+        /// <summary>
+        /// Inserts a new streamline and performs triangulation
+        /// </summary>
+        /// <param name="poly">A boundary polyline.</param>
+        /// <returns>A delaunay triangulation.</returns>
+        private TriangleNet.Mesh InsertStreamline(Polyline poly)
+        {
+
+            // Add the points of the polyline into the geom
+            for (int i = 0; i < poly.Count; i++)
+            {
+                TriGeom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
+            }
+            // Create the connectivity between the points in geom
+            for (int i = 0; i < poly.Count; i++)
+            {
+                TriGeom.AddSegment(i, (i + 1) % poly.Count);
+            }
+
+            // Create triangulated mesh from input geometry
+            var mesh = new TriangleNet.Mesh();
+            mesh.Triangulate(TriGeom);
 
             return mesh;
         }
