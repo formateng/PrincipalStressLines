@@ -58,8 +58,8 @@ namespace LilyPad.Objects
             stresslinesFamily1 = new List<Polyline>(family1Intial);
             stresslinesFamily2 = new List<Polyline>(family2Intial);
 
-            Streamlines streamlines1 = new Streamlines(PrincipalMesh1);
-            Streamlines streamlines2 = new Streamlines(PrincipalMesh2);
+            Streamlines streamlines1 = new Streamlines(PrincipalMesh1, StepSize, 4, MaxError, 0.0);
+            Streamlines streamlines2 = new Streamlines(PrincipalMesh2, StepSize, 4, MaxError, 0.0);
 
             //discretise the initial stresslines
             Discretise();
@@ -70,13 +70,13 @@ namespace LilyPad.Objects
                 //Create new stress-lines using the points of largest deviation as the seeds
                 if (i < iterations1)
                 {
-                    stresslinesFamily1.Add(streamlines1.CreateStreamline(FindDeviation(2), StepSize, 4, MaxError, 0.0));
+                    stresslinesFamily1.Add(streamlines1.CreateStreamline(FindDeviation(2)));
                     Discretise();
                 }
 
                 if (i < iterations2)
                 {
-                    stresslinesFamily2.Add(streamlines2.CreateStreamline(FindDeviation(1), StepSize, 4, MaxError, 0.0));
+                    stresslinesFamily2.Add(streamlines2.CreateStreamline(FindDeviation(1)));
                     Discretise();
                 }
             }

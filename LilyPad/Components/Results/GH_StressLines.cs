@@ -70,9 +70,9 @@ namespace LilyPad.Components.Results
                 iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;
 
             //_________________________________________________________________________________
-            Streamlines streamlines = new Streamlines(iPrincipalMesh);
+            Streamlines streamlines = new Streamlines(iPrincipalMesh, iStepSize, Convert.ToInt32(iMethod), iMaxAngle, iDTest);
 
-            List<Polyline> oStressLines = streamlines.CreateStreamlines(iSeed, iStepSize, Convert.ToInt32(iMethod), Convert.ToInt32(iStrategy), iDSep, iDTest, iMaxAngle);
+            List<Polyline> oStressLines = streamlines.CreateStreamlines(iSeed, Convert.ToInt32(iStrategy), iDSep);
 
             //___________________________________________________________________________________
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra.Double;
+using MathNet.Numerics.Optimization;
 using Rhino.Geometry;
 using TriangleNet;
 using TriangleNet.Data;
@@ -17,9 +19,9 @@ namespace LilyPad.Objects
         public Rhino.Geometry.Mesh Mesh;
         private Polyline[] NakedEdges;
         private Plane MeshPlane;
+        private TriangleNet.Geometry.InputGeometry TriGeom;
 
         //Variables_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-        private List<Point3d> CheckPts;
 
         //Streamline
         private Point3d Point;
@@ -34,11 +36,14 @@ namespace LilyPad.Objects
         private int Method;
         private double MaxError;
         private double DTest;
+        private int SeedingStrategy;
+        private double DSep;
 
         //Streamlines
         public List<Point3d> UsedSeeds;
         private Polyline Streamline;
-
+        private List<Polyline> CompletedStreamlines;
+        private List<Point3d> CheckPts;
 
 
         //Constructors_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -63,23 +68,36 @@ namespace LilyPad.Objects
             MeshPlane = principalMesh.MeshPlane;
         }
 
+        /// <summary>
+        /// creates a new streamline class, importing data of a given principalMesh
+        /// </summary>
+        public Streamlines(PrincipalMesh principalMesh, double iStepSize, int method, double maxError, double dTest)
+        {
+            PrincipalMesh = principalMesh;
+            Mesh = principalMesh.Mesh;
+            Mesh.FaceNormals.ComputeFaceNormals();
+            NakedEdges = principalMesh.NakedEdges;
+            MeshPlane = principalMesh.MeshPlane;
+
+            //import variables
+            IStepSize = iStepSize;
+            StepSize = iStepSize;
+            Method = method;
+            MaxError = maxError;
+            DTest = dTest;
+        }
+
         //Methods_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
         /// <summary>
         /// Creates a streamline by using multiple methods where the streamline is represented by a ployline with each vertice on the mesh
         /// </summary>
-        public Polyline CreateStreamline(Point3d seed, double iStepSize, int method, double maxError, double dTest)
+        public Polyline CreateStreamline(Point3d seed)
         {
             Streamline = new Polyline();
 
-            //import variables
-            StepSize = iStepSize;
-            IStepSize = iStepSize;
-            Method = method;
-            MaxError = maxError;
-            DTest = dTest;
-
             //Starting varibles
             Point = seed;
+            StepSize = IStepSize;
 
             //Creates first part of streamline from the seed in first direction
             Polyline segment1 = CreateStreamlineSegment(1);
@@ -88,7 +106,7 @@ namespace LilyPad.Objects
 
             //reset variables
             Point = seed;
-            StepSize = iStepSize;
+            StepSize = IStepSize;
 
 
             //Creates second part of streamline from the seed in second direction
@@ -102,6 +120,211 @@ namespace LilyPad.Objects
         LOOPDETECTED:;
             //return the whole streamline contained in segement1
             return segment1;
+        }
+
+        /// <summary>
+        /// Creates a series of streamlines by using two seeding methods to find the location of the new streamline
+        /// </summary>
+        public List<Polyline> CreateStreamlines(Point3d seed, int seedingMethod, double dSep)
+        {
+            //Starting varibles
+            SeedingStrategy = seedingMethod;
+            DSep = dSep;
+
+            CompletedStreamlines = new List<Polyline>();
+            UsedSeeds = new List<Point3d>();
+            CheckPts = new List<Point3d>();
+
+            //Neighbour seeding strategy
+            if (seedingMethod == 1)
+            {
+                NeighbourStreamlines(seed);
+            }
+
+            //Farthest Point Strategy
+            if (seedingMethod == 2)
+            {
+                FarthestSteamlines(seed);
+            }
+            return CompletedStreamlines;
+        }
+
+        /// <summary>
+        /// streamline seeding method for finding next seed point adjecent to existing streamlines
+        /// </summary>
+        /// <param name="seed"></param>
+        private void NeighbourStreamlines(Point3d seed)
+        {
+            List<Point3d> seeds = new List<Point3d>();
+            seeds.Add(seed);
+            Polyline activeStreamline = new Polyline();
+
+            while (seeds.Count > 0)
+            {
+
+                //get new seed
+                seed = seeds[0];
+
+                //test if seed is valid
+                Vector3d radius1 = new Vector3d(DSep * 0.99, DSep * 0.99, DSep * 0.99);
+                BoundingBox testBox = new BoundingBox(seed - radius1, seed + radius1);
+                for (int i = 0; i < CheckPts.Count; i++)
+                {
+                    if (testBox.Contains(CheckPts[i]))
+                    {
+                        if ((CheckPts[i] - seed).Length < DSep * 0.99)
+                        {
+                            seeds.RemoveAt(0);
+                            goto BREAK;
+                        }
+                    }
+
+                }
+
+                //generate streamline
+                activeStreamline = CreateStreamline(seed);
+
+                //prevents the inclusion of very short streamlines
+                if (activeStreamline.Count < 3)
+                {
+                    seeds.RemoveAt(0);
+                    goto BREAK;
+                }
+
+                //add streamline into list
+                CompletedStreamlines.Add(activeStreamline);
+
+                //add streamline vertices into list of checkpts for streamline distance detection
+                for (int i = 0; i < activeStreamline.Count; i++)
+                {
+                    CheckPts.Add(activeStreamline[i]);
+                }
+
+                //remove current seed
+                UsedSeeds.Add(seed);
+                seeds.RemoveAt(0);
+
+                //find new seeds
+                for (int i = 0; i < activeStreamline.Count - 1; i += 10)
+                {
+                    Point3d pt = activeStreamline[i];
+
+                    //find the streamline direction
+                    Point3d ptPlus1 = activeStreamline[i + 1];
+                    Vector3d streamlineDirection = ptPlus1 - pt;
+
+                    //find the point on the mesh
+                    MeshPoint meshPt = Mesh.ClosestMeshPoint(pt, 0.0);
+
+                    //offset pt by the streamline direction rotated by 90 degrees in both directions
+                    streamlineDirection.Rotate(Math.PI / 2, Mesh.FaceNormals[meshPt.FaceIndex]); ;
+                    Point3d seed1 = pt + streamlineDirection / streamlineDirection.Length * DSep;
+                    streamlineDirection.Rotate(Math.PI, Mesh.FaceNormals[meshPt.FaceIndex]); ;
+                    Point3d seed2 = pt + streamlineDirection / streamlineDirection.Length * DSep;
+
+                    //move seeds onto the mesh
+                    seed1 = Mesh.ClosestPoint(seed1);
+                    seed2 = Mesh.ClosestPoint(seed2);
+
+                    //insert new seeds
+                    seeds.Insert(0, seed1);
+                    seeds.Insert(0, seed2);
+                }
+
+            BREAK:;
+            }
+
+        }
+
+        /// <summary>
+        /// steamline seeding method for finding next seed in largest gap between existing streamlines
+        /// </summary>
+        /// <param name="seed"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        private void FarthestSteamlines(Point3d seed)
+        {
+            //test if mesh is planar
+            double testDistTo = 0.0;
+            for (int i = 3; i < Mesh.Faces.Count; i++)
+            {
+                MeshFace face = Mesh.Faces[i];
+                Point3d centre = Mesh.Vertices[face.A] + Mesh.Vertices[face.B] + Mesh.Vertices[face.C] + Mesh.Vertices[face.D];
+                centre /= 4;
+                testDistTo += Math.Abs(MeshPlane.DistanceTo(centre));
+            }
+            if (testDistTo > 0.0001) throw new NotImplementedException("Farthest point seeding method is not yet implement for non-Planar Meshes");
+
+            //new parameters
+            Polyline activeStreamline = new Polyline();
+            PolylineCurve boundary = new PolylineCurve();
+
+            //Create boundary
+            if (NakedEdges.Length > 1)
+            {
+                throw new ArgumentException("Field element boundaries cannot be assembled into a single boundary curve");
+            }
+            else boundary = NakedEdges[0].ToPolylineCurve();
+
+            //Transform the boundary into an offset polyline curve
+            // Offset curve by the seperation distance
+            //boundary.Offset(MeshPlane, dSep, stepSize / 100, CurveOffsetCornerStyle.Sharp);
+
+            //convert the curve to a polyline with vertices at approximately dSep apart
+            int n = Convert.ToInt32(Math.Ceiling(boundary.GetLength() / DSep));
+            Point3d[] boundPointsArr = new Point3d[n];
+            double[] boundT = boundary.DivideByCount(n, false, out boundPointsArr);
+            List<Point3d> boundPoints = boundPointsArr.OfType<Point3d>().ToList();
+            boundPoints.Add(boundary.PointAtEnd);
+            boundPoints.Insert(0, boundary.PointAtStart);
+            Polyline boundPolyline = new Polyline(boundPoints);
+
+
+            // InitialTriangulate boundary polyline
+            TriangleNet.Mesh tmesh = InitialTriangulate(boundPolyline);
+
+            List<Circle> circles = default;
+            int limit = 100;
+
+            for (int i = 0; i < limit; i++) //REMOVE HARD STOP
+            {
+                //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline
+                foreach (var vertex in tmesh.Vertices) { CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
+
+                //generate streamline
+                activeStreamline = CreateStreamline(seed);
+                CompletedStreamlines.Add(activeStreamline);
+                /*                    Vertex vertex1 = new Vertex();*/
+                tmesh = InsertStreamline(activeStreamline);
+
+                /*                    //add streamline points into the delaunay mesh
+                                    for (int j = 1; j < activeStreamline.Count - 1; j++)
+                                    {
+                                        vertex1 = new TriangleNet.Data.. Vertex(activeStreamline[j].X, activeStreamline[j].Y);
+                                        bool test = tmesh.InsertVertex(vertex1);
+                                    }*/
+                //Add seed to used seed list
+                UsedSeeds.Add(seed);
+
+                // Find largest circumcircle
+                circles = Circumcircles(tmesh);
+                circles.Sort((c1, c2) => c2.Radius.CompareTo(c1.Radius));
+
+            RETRY:
+                //determine if saturation has been reached
+                if (circles[0].Diameter < DSep * 2) break;
+                //if (!tmesh.Bounds.Contains(new TriangleNet.Geometry.Point(circles[0].Center.X, circles[0].Center.Y)))
+                //PointContainment containment = boundPolyline.Contains(circles[0].Center, MeshPlane, 0.00001);
+                Point3d centerOnMesh = Mesh.ClosestPoint(circles[0].Center);
+                if (centerOnMesh.DistanceTo(circles[0].Center) > 0.01)
+                {
+                    circles.RemoveAt(0);
+                    goto RETRY;
+                }
+
+                //get new seed and check pts
+                seed = circles[0].Center;
+            }
         }
 
         /// <summary>
@@ -294,205 +517,38 @@ namespace LilyPad.Objects
         }
 
         /// <summary>
-        /// Creates a series of streamlines by using two seeding methods to find the location of the new streamline
+        /// Evaluates the direction of the field using the method within PrincipalMesh
         /// </summary>
-        public List<Polyline> CreateStreamlines(Point3d seed, double stepSize, int integrationMethod, int seedingMethod, double dSep, double dTest, double maxError)
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private Vector3d Evaluate(Point3d point)
         {
-            List<Polyline> streamlines = new List<Polyline>();
-            List<Point3d> UsedSeeds = new List<Point3d>();
-            CheckPts = new List<Point3d>();
-
-            //Neigbour seeding strategy
-            if (seedingMethod == 1)
-            {
-                List<Point3d> seeds = new List<Point3d>();
-                seeds.Add(seed);
-                Polyline activeStreamline = new Polyline();
-
-                while (seeds.Count > 0)
-                {
-
-                    //get new seed
-                    seed = seeds[0];
-
-                    //test if seed is valid
-                    Vector3d radius1 = new Vector3d(dSep * 0.99, dSep * 0.99, dSep * 0.99);
-                    BoundingBox testBox = new BoundingBox(seed - radius1, seed + radius1);
-                    for (int i = 0; i < CheckPts.Count; i++)
-                    {
-                        if (testBox.Contains(CheckPts[i]))
-                        {
-                            if ((CheckPts[i] - seed).Length < dSep * 0.99)
-                            {
-                                seeds.RemoveAt(0);
-                                goto BREAK;
-                            }
-                        }
-
-                    }
-
-                    //generate streamline
-                    activeStreamline = CreateStreamline(seed, stepSize, integrationMethod, maxError, dTest);
-
-                    //prevents the inclusion of very short streamlines
-                    if (activeStreamline.Count < 3)
-                    {
-                        seeds.RemoveAt(0);
-                        goto BREAK;
-                    }
-
-                    //add streamline into list
-                    streamlines.Add(activeStreamline);
-
-                    //add streamline vertices into list of checkpts for streamline distance detection
-                    for (int i = 0; i < activeStreamline.Count; i++)
-                    {
-                        CheckPts.Add(activeStreamline[i]);
-                    }
-
-                    //remove current seed
-                    UsedSeeds.Add(seed);
-                    seeds.RemoveAt(0);
-
-                    //find new seeds
-                    for (int i = 0; i < activeStreamline.Count - 1; i += 10)
-                    {
-                        Point3d pt = activeStreamline[i];
-
-                        //find the streamline direction
-                        Point3d ptPlus1 = activeStreamline[i + 1];
-                        Vector3d streamlineDirection = ptPlus1 - pt;
-
-                        //find the point on the mesh
-                        MeshPoint meshPt = Mesh.ClosestMeshPoint(pt, 0.0);
-
-                        //offset pt by the streamline direction rotated by 90 degrees in both directions
-                        streamlineDirection.Rotate(Math.PI / 2, Mesh.FaceNormals[meshPt.FaceIndex]); ;
-                        Point3d seed1 = pt + streamlineDirection / streamlineDirection.Length * dSep;
-                        streamlineDirection.Rotate(Math.PI, Mesh.FaceNormals[meshPt.FaceIndex]); ;
-                        Point3d seed2 = pt + streamlineDirection / streamlineDirection.Length * dSep;
-
-                        //move seeds onto the mesh
-                        seed1 = Mesh.ClosestPoint(seed1);
-                        seed2 = Mesh.ClosestPoint(seed2);
-
-                        //insert new seeds
-                        seeds.Insert(0, seed1);
-                        seeds.Insert(0, seed2);
-                    }
-
-                BREAK:;
-                }
-
-            }
-
-            //Farthest Point Strategy
-            if (seedingMethod == 2)
-            {
-                //test if mesh is planar
-                double testDistTo = 0.0;
-                for (int i = 3; i < Mesh.Faces.Count; i++)
-                {
-                    MeshFace face = Mesh.Faces[i];
-                    Point3d centre = Mesh.Vertices[face.A] + Mesh.Vertices[face.B] + Mesh.Vertices[face.C] + Mesh.Vertices[face.D];
-                    centre /= 4;
-                    testDistTo += Math.Abs(MeshPlane.DistanceTo(centre));
-                }
-                if (testDistTo > 0.0001) throw new NotImplementedException("Farthest point seeding method is not yet implement for non-Planar Meshes");
-
-                //new parameters
-                Polyline activeStreamline = new Polyline();
-                PolylineCurve boundary = new PolylineCurve();
-
-                //Create boundary
-                if (NakedEdges.Length > 1)
-                {
-                    throw new ArgumentException("Field element boundaries cannot be assembled into a single boundary curve");
-                }
-                else boundary = NakedEdges[0].ToPolylineCurve();
-
-                //Transform the boundary into an offset polyline curve
-                // Offset curve by the seperation distance
-                //boundary.Offset(MeshPlane, dSep, stepSize / 100, CurveOffsetCornerStyle.Sharp);
-
-                //convert the curve to a polyline with vertices at approximately dSep apart
-                int n = Convert.ToInt32(Math.Ceiling(boundary.GetLength() / dSep));
-                Point3d[] boundPointsArr = new Point3d[n];
-                double[] boundT = boundary.DivideByCount(n, false, out boundPointsArr);
-                List<Point3d> boundPoints = boundPointsArr.OfType<Point3d>().ToList();
-                boundPoints.Add(boundary.PointAtEnd);
-                boundPoints.Insert(0, boundary.PointAtStart);
-                Polyline boundPolyline = new Polyline(boundPoints);
-
-
-                // InitialTriangulate boundary polyline
-                TriangleNet.Mesh tmesh = InitialTriangulate(boundPolyline);
-
-                List<Circle> circles = default;
-
-                for (int i = 0; i < 1000; i++) //REMOVE HARD STOP
-                {
-                    //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline
-                    foreach (var vertex in tmesh.Vertices) { CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
-
-                    //generate streamline
-                    activeStreamline = CreateStreamline(seed, stepSize, integrationMethod, maxError, dTest);
-                    streamlines.Add(activeStreamline);
-/*                    Vertex vertex1 = new Vertex();*/
-                    tmesh = InsertStreamline(activeStreamline);
-
-/*                    //add streamline points into the delaunay mesh
-                    for (int j = 1; j < activeStreamline.Count - 1; j++)
-                    {
-                        vertex1 = new TriangleNet.Data.. Vertex(activeStreamline[j].X, activeStreamline[j].Y);
-                        bool test = tmesh.InsertVertex(vertex1);
-                    }*/
-                    //Add seed to used seed list
-                    UsedSeeds.Add(seed);
-
-                    // Find largest circumcircle
-                    circles = Circumcircles(tmesh);
-                    circles.Sort((c1, c2) => c2.Radius.CompareTo(c1.Radius));
-
-                RETRY:
-                    //determine if saturation has been reached
-                    if (circles[0].Diameter < dSep * 2) break;
-                    //if (!tmesh.Bounds.Contains(new TriangleNet.Geometry.Point(circles[0].Center.X, circles[0].Center.Y)))
-                    //PointContainment containment = boundPolyline.Contains(circles[0].Center, MeshPlane, 0.00001);
-                    Point3d centerOnMesh = Mesh.ClosestPoint(circles[0].Center);
-                    if (centerOnMesh.DistanceTo(circles[0].Center) > 0.01)
-                    {
-                        circles.RemoveAt(0);
-                        goto RETRY;
-                    }
-
-                    //get new seed and check pts
-                    seed = circles[0].Center;
-                }
-            }
-            return streamlines;
+            Vector3d vector = new Vector3d();
+            PrincipalMesh.Evaluate(point, ref vector);
+            return vector;
         }
 
         /// <summary>
         /// solves a single step for the integration streamline method
         /// </summary>
-        public double SolveStep(Point3d start, out Point3d end, int method, int direction)
+        private double SolveStep(Point3d start, out Point3d end, int method, int direction)
         {
 
             if (method == 1)
             {
-                return SolveEuler(start, out end, direction);
+                throw new NotImplementedException("Euler integration is no longer implemented");
+                //return SolveEuler(start, out end, direction);
             }
 
             if (method == 2)
             {
-                throw new NotImplementedException("RK 2 integration is not yet implement");
+                throw new NotImplementedException("RK 2 integration is no longer implemented");
                 //test = solveRK2(start, ref end, stepSize, direction);
             }
 
             if (method == 3)
             {
-                throw new NotImplementedException("RK 3 integration is not yet implement");
+                throw new NotImplementedException("RK 3 integration is no longer implemented");
                 //test = solveRK3(start, ref end, stepSize, direction);
             }
 
@@ -504,6 +560,7 @@ namespace LilyPad.Objects
             return -1;
         }
 
+        /* THIS HAS BEEN MOTHBALLED AS ONLY THE RK4 INTEGRATOR IS USEFUL AT THIS POINT
         /// <summary>
         /// solves a single step using the Euler Method, and estimates the error using trapezoidal rule to compare the estimated results
         /// </summary>
@@ -524,7 +581,7 @@ namespace LilyPad.Objects
             return ((vectorFromStart - vectorFromEnd) / 2).Length;
         }
 
-        /*
+
         /// <summary>
         ///solves a single step for the RK4 Heun's method integration method
         /// <summary>
@@ -634,7 +691,7 @@ namespace LilyPad.Objects
             return ((vectorFromPoint3 - vectorFromEnd) / 6).Length;
         }
 
-        private TriangleNet.Geometry.InputGeometry TriGeom;
+
         /// <summary>
         /// Performs the initial triangulation of the boundary
         /// </summary>
@@ -711,6 +768,23 @@ namespace LilyPad.Objects
                 v1 = vs[tri.P1];
                 v2 = vs[tri.P2];
 
+                //Test for isosceles triangles
+                //create vector for each side
+                Vector3d side0 = new Vector3d(v0.X - v2.X, v0.Y - v2.Y, 0.0);
+                Vector3d side1 = new Vector3d(v1.X - v0.X, v1.Y - v0.Y, 0.0);
+                Vector3d side2 = new Vector3d(v2.X - v1.X, v2.Y - v1.Y, 0.0);
+                Vector3d[] sides = { side0, side1, side2 };
+
+                //measure angle between adjecent sides, break if angle is greather than PI*3/5
+                bool largeAngle = false;
+                for (int i = 0; i < sides.Length; i++)
+                {
+                    double angle = Vector3d.VectorAngle(-1*sides[(i + sides.Length - 1) % sides.Length], sides[i]);
+                    if(angle > Math.PI*3/5) largeAngle = true;
+                }
+                if (largeAngle) continue;
+
+                //create circumscribed circle
                 c = new Circle(
                   new Point3d(v0.X, v0.Y, 0.0),
                   new Point3d(v1.X, v1.Y, 0.0),
@@ -723,12 +797,6 @@ namespace LilyPad.Objects
             return circles;
         }
 
-        private Vector3d Evaluate(Point3d point)
-        {
-            Vector3d vector = new Vector3d();
-            PrincipalMesh.Evaluate(point, ref vector);
-            return vector;
-        }
 
     }
 }
