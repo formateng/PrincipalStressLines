@@ -13,3 +13,19 @@ C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.gha
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.pdb
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.ResourceIcons.resources
 C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\obj\Debug\net48\LilyPad.csproj.GenerateResource.cache
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\LilyPad.gha
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\LilyPad.pdb
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\MathNet.Numerics.dll
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.AssemblyReference.cache
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.ResourceIcons.resources
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.GenerateResource.cache
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfoInputs.cache
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfo.cs
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.CoreCompileInputs.cache
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.sourcelink.json
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.Up2Date
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.gha
+C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.pdb
+C:\Users\Matt C\AppData\Roaming\Grasshopper\Libraries\Debug\net48\LilyPad.gha
+C:\Users\Matt C\AppData\Roaming\Grasshopper\Libraries\Debug\net48\LilyPad.pdb

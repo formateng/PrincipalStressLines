@@ -6,6 +6,8 @@
     <Title>LilyPad</Title>
     <Description>Description of LilyPad</Description>
     <TargetExt>.gha</TargetExt>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <BaseOutputPath>C:\Users\Matt C\AppData\Roaming\Grasshopper\Libraries</BaseOutputPath>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -39,7 +41,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Grasshopper" Version="6.35.21222.17001" IncludeAssets="compile;build" />
+    <PackageReference Include="Grasshopper" Version="7.38.24338.17001" IncludeAssets="compile;build" />
     <PackageReference Include="MathNet.Numerics" Version="4.8.0" />
   </ItemGroup>
   

@@ -1,5 +1,8 @@
 is_global = true
 build_property.RootNamespace = LilyPad
-build_property.ProjectDir = C:\Users\Matthew\Documents\GitHub\LilyPad\LilyPad\
+build_property.ProjectDir = C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "uLmiS8RNBxs=",
+  "dgSpecHash": "+BzVDA1gNfY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matthew\\Documents\\GitHub\\LilyPad\\LilyPad\\LilyPad.csproj",
+  "projectFilePath": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\LilyPad.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Matthew\\.nuget\\packages\\grasshopper\\6.35.21222.17001\\grasshopper.6.35.21222.17001.nupkg.sha512",
-    "C:\\Users\\Matthew\\.nuget\\packages\\mathnet.numerics\\4.8.0\\mathnet.numerics.4.8.0.nupkg.sha512",
-    "C:\\Users\\Matthew\\.nuget\\packages\\rhinocommon\\6.35.21222.17001\\rhinocommon.6.35.21222.17001.nupkg.sha512"
+    "C:\\Users\\Matt C\\.nuget\\packages\\grasshopper\\7.38.24338.17001\\grasshopper.7.38.24338.17001.nupkg.sha512",
+    "C:\\Users\\Matt C\\.nuget\\packages\\mathnet.numerics\\4.8.0\\mathnet.numerics.4.8.0.nupkg.sha512",
+    "C:\\Users\\Matt C\\.nuget\\packages\\rhinocommon\\7.38.24338.17001\\rhinocommon.7.38.24338.17001.nupkg.sha512"
   ],
   "logs": []
 }
