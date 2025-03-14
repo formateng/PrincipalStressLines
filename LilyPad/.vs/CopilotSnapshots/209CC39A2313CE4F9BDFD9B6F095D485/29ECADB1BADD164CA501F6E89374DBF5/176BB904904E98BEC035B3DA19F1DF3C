@@ -10,15 +10,15 @@ using LilyPad.Objects.ShapeFunction;
 
 namespace LilyPad.Components.Setup
 {
-    public class GH_MembraneQuad8 : GH_Component
+    public class GH_MindlinReissnerQuad8 : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_MembraneQuad8 class.
+        /// Initializes a new instance of the GH_MindlinReissnerQuad8 class.
         /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_MembraneQuad8()
-          : base("8 Node Quad Membrane", "Quad8Mem",
-              "Transforms Mesh and results into 8-node quad membrane elements for principal stress line analysis using the theory of in-plane loaded plates and quadratic shape functions",
+        public GH_MindlinReissnerQuad8()
+          : base("8 Node Quad Slab", "Quad8Slab",
+              "Transforms Mesh and results into 8-node quad slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Quadratic shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
               "LilyPad", " Setup")
         {
         }
@@ -28,8 +28,8 @@ namespace LilyPad.Components.Setup
         {
             pManager.AddMeshParameter("Mesh", "M", "Mesh", GH_ParamAccess.item);
             pManager.AddPointParameter("Mid-Nodes", "md", "Mid-node locations as a list of points", GH_ParamAccess.list);
-            pManager.AddVectorParameter("Displacments Corners", "U-c", "Displacement vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
-            pManager.AddVectorParameter("Displacments Mid-Nodes", "U-md", "Displacement vectors for each mid-node in a list sorted in the same order as the mid-node points", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Rotations Corners", "φ-c", "Rotational vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Rotations Mid-Nodes", "φ-md", "Rotational vectors for each mid-node in a list sorted in the same order as the mid-node points", GH_ParamAccess.list);
             pManager.AddNumberParameter("Poisson's ratio", "v", "Poisson's ratio", GH_ParamAccess.item);
         }
 
@@ -42,21 +42,20 @@ namespace LilyPad.Components.Setup
 
         /// <summary>
         /// Uses the provided mesh to create a series of quad 8 elements
-        /// The mid-nodes and mid-node displacments are used for the additional 4 nodes around the perimeter of the element
         /// Assembles list of elements into two principal meshes one for each direction
         /// </summary>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Mesh iMesh = new Mesh();
             List<Point3d> iMd = new List<Point3d>();
-            List<Vector3d> iUc = new List<Vector3d>();
-            List<Vector3d> iUmd = new List<Vector3d>();
+            List<Vector3d> iφc = new List<Vector3d>();
+            List<Vector3d> iφmd = new List<Vector3d>();
             double iV = 0.0;
 
             DA.GetData(0, ref iMesh);
             DA.GetDataList(1, iMd);
-            DA.GetDataList(2, iUc);
-            DA.GetDataList(3, iUmd);
+            DA.GetDataList(2, iφc);
+            DA.GetDataList(3, iφmd);
             DA.GetData(4, ref iV);
 
             //________________________________________________________________________________________________________________________
@@ -89,21 +88,24 @@ namespace LilyPad.Components.Setup
                 int p5 = midPoints.ClosestIndex(point5);
                 int p7 = midPoints.ClosestIndex(point7);
 
-                // Check if points are coplanar
-                if (!ArePointsCoplanar(point1, point3, point6, point8))
-                {
-                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} points are not coplanar.");
-                    return;
-                }
+                //alter vectors so they are in the "mathematical form" rather than the right-hand rule
+                Vector3d U1 = new Vector3d(iφc[p1].Y, -iφc[p1].X, 0.0);
+                Vector3d U2 = new Vector3d(iφmd[p2].Y, -iφmd[p2].X, 0.0);
+                Vector3d U3 = new Vector3d(iφc[p3].Y, -iφc[p3].X, 0.0);
+                Vector3d U4 = new Vector3d(iφmd[p4].Y, -iφmd[p4].X, 0.0);
+                Vector3d U5 = new Vector3d(iφmd[p5].Y, -iφmd[p5].X, 0.0);
+                Vector3d U6 = new Vector3d(iφc[p6].Y, -iφc[p6].X, 0.0);
+                Vector3d U7 = new Vector3d(iφmd[p7].Y, -iφmd[p7].X, 0.0);
+                Vector3d U8 = new Vector3d(iφc[p8].Y, -iφc[p8].X, 0.0);
 
                 //Create and analyse elements
-                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV);
+                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
 
                 //output data
                 quadraticIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(quadraticIsoPara1));
 
-                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV);
+                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
 
                 quadraticIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(quadraticIsoPara2));
@@ -117,20 +119,11 @@ namespace LilyPad.Components.Setup
             PrincipalMesh oSigma1 = new PrincipalMesh(Sigma1);
             PrincipalMesh oSigma2 = new PrincipalMesh(Sigma2);
 
+
             //________________________________________________________________________________________________________________________
 
             DA.SetData(0, oSigma1);
             DA.SetData(1, oSigma2);
-        }
-
-        // Helper method to check if four points are coplanar
-        private bool ArePointsCoplanar(Point3d p1, Point3d p2, Point3d p3, Point3d p4)
-        {
-            Vector3d v1 = p2 - p1;
-            Vector3d v2 = p3 - p1;
-            Vector3d normal = Vector3d.CrossProduct(v1, v2);
-            double d = normal * (p4 - p1);
-            return Math.Abs(d) < 1e-6;
         }
 
         /// Assign component icon
@@ -138,22 +131,22 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return ResourceIcons.IconMembraneQuad8;
+                return ResourceIcons.IconSlabQuad8;
             }
         }
 
         /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
-            get { return new Guid("68dde900-f69b-42a1-9255-298eea3ebfcb"); }
+            get { return new Guid("48dde900-f69b-42a1-9255-298eea3ebfcb"); }
         }
 
-        /// Set component to be in the FIRST group of the sub-category
+        ///Set component to be in the SECOND group of the sub-category
         public override GH_Exposure Exposure
         {
             get
             {
-                return GH_Exposure.primary;
+                return GH_Exposure.secondary;
             }
         }
     }

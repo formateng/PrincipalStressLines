@@ -29,21 +29,14 @@ namespace LilyPad.Objects
         private List<Polyline> discretisedStresslinesFamily2;
         private double StepSize;
         private double MaxError;
-        private Plane MeshPlane;
 
 
 
         //Constructors
         public StresslineStructure(PrincipalMesh principalMesh1, PrincipalMesh principalMesh2)
         {
-            if (!IsPlanar(principalMesh1.Mesh, out Plane plane1) || !IsPlanar(principalMesh2.Mesh, out Plane plane2))
-            {
-                throw new ArgumentException("One or both of the provided meshes are not planar.");
-            }
-
             PrincipalMesh1 = principalMesh1;
             PrincipalMesh2 = principalMesh2;
-            MeshPlane = plane1; // Assuming both meshes are on the same plane
 
             StepSize = 0.1;
             MaxError = 0.0;
@@ -53,13 +46,6 @@ namespace LilyPad.Objects
         {
             PrincipalMesh1 = new PrincipalMesh();
             PrincipalMesh2 = new PrincipalMesh();
-
-            if (!IsPlanar(PrincipalMesh1.Mesh, out Plane plane1) || !IsPlanar(PrincipalMesh2.Mesh, out Plane plane2))
-            {
-                throw new ArgumentException("One or both of the provided meshes are not planar.");
-            }
-
-            MeshPlane = plane1; // Assuming both meshes are on the same plane
 
             StepSize = 0.1;
             MaxError = 0.0;
@@ -351,25 +337,6 @@ namespace LilyPad.Objects
             }
 
             return locationOfLargestDevi;
-        }
-
-        private bool IsPlanar(Mesh mesh, out Plane plane)
-        {
-            plane = new Plane();
-            if (mesh.Vertices.Count < 3)
-                return false;
-
-            Point3d[] vertices = mesh.Vertices.ToPoint3dArray();
-            plane = new Plane(vertices[0], vertices[1], vertices[2]);
-
-            for (int i = 3; i < vertices.Length; i++)
-            {
-                double distToPlane = Math.Abs(plane.DistanceTo(vertices[i]));
-                if (!(distToPlane<0.001))
-                    return false;
-            }
-
-            return true;
         }
 
     }

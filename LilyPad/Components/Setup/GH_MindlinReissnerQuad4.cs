@@ -66,6 +66,18 @@ namespace LilyPad.Components.Setup
                 int p3 = face[3];
                 int p4 = face[2];
 
+                Point3d point1 = iMesh.Vertices[p1];
+                Point3d point2 = iMesh.Vertices[p2];
+                Point3d point3 = iMesh.Vertices[p3];
+                Point3d point4 = iMesh.Vertices[p4];
+
+                // Check if points are coplanar
+                if (!ArePointsCoplanar(point1, point2, point3, point4))
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} points are not coplanar.");
+                    return;
+                }
+
                 //alter vectors so they are in the "mathematical form" rather than the right-hand rule
                 Vector3d U1 = new Vector3d(iφ[p1].Y, -iφ[p1].X, 0.0);
                 Vector3d U2 = new Vector3d(iφ[p2].Y, -iφ[p2].X, 0.0);
@@ -73,13 +85,13 @@ namespace LilyPad.Components.Setup
                 Vector3d U4 = new Vector3d(iφ[p4].Y, -iφ[p4].X, 0.0);
 
                 //Create and analyse elements
-                Quad4Element bilinearIsoPara1 = new Quad4Element(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV);
 
                 //output data
                 bilinearIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(bilinearIsoPara1));
 
-                Quad4Element bilinearIsoPara2 = new Quad4Element(iMesh.Vertices[p1], iMesh.Vertices[p2], iMesh.Vertices[p3], iMesh.Vertices[p4], U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV);
 
                 bilinearIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(bilinearIsoPara2));
@@ -93,11 +105,20 @@ namespace LilyPad.Components.Setup
             PrincipalMesh oSigma1 = new PrincipalMesh(Sigma1);
             PrincipalMesh oSigma2 = new PrincipalMesh(Sigma2);
 
-
             //________________________________________________________________________________________________________________________
 
             DA.SetData(0, oSigma1);
             DA.SetData(1, oSigma2);
+        }
+
+        // Helper method to check if four points are coplanar
+        private bool ArePointsCoplanar(Point3d p1, Point3d p2, Point3d p3, Point3d p4)
+        {
+            Vector3d v1 = p2 - p1;
+            Vector3d v2 = p3 - p1;
+            Vector3d normal = Vector3d.CrossProduct(v1, v2);
+            double d = normal * (p4 - p1);
+            return Math.Abs(d) < 1e-6;
         }
 
         /// Assign component icon

@@ -88,6 +88,13 @@ namespace LilyPad.Components.Setup
                 int p5 = midPoints.ClosestIndex(point5);
                 int p7 = midPoints.ClosestIndex(point7);
 
+                // Check if points are coplanar
+                if (!ArePointsCoplanar(point1, point3, point6, point8))
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} points are not coplanar.");
+                    return;
+                }
+
                 //alter vectors so they are in the "mathematical form" rather than the right-hand rule
                 Vector3d U1 = new Vector3d(iφc[p1].Y, -iφc[p1].X, 0.0);
                 Vector3d U2 = new Vector3d(iφmd[p2].Y, -iφmd[p2].X, 0.0);
@@ -119,11 +126,20 @@ namespace LilyPad.Components.Setup
             PrincipalMesh oSigma1 = new PrincipalMesh(Sigma1);
             PrincipalMesh oSigma2 = new PrincipalMesh(Sigma2);
 
-
             //________________________________________________________________________________________________________________________
 
             DA.SetData(0, oSigma1);
             DA.SetData(1, oSigma2);
+        }
+
+        // Helper method to check if four points are coplanar
+        private bool ArePointsCoplanar(Point3d p1, Point3d p2, Point3d p3, Point3d p4)
+        {
+            Vector3d v1 = p2 - p1;
+            Vector3d v2 = p3 - p1;
+            Vector3d normal = Vector3d.CrossProduct(v1, v2);
+            double d = normal * (p4 - p1);
+            return Math.Abs(d) < 1e-6;
         }
 
         /// Assign component icon

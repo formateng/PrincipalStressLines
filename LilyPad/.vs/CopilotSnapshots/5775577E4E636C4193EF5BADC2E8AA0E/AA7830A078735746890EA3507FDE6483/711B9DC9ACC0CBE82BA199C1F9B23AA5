@@ -288,7 +288,7 @@ namespace LilyPad.Objects
 
             for (int i = 0; i < limit; i++) //REMOVE HARD STOP
             {
-                //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline - THIS NEEDS UPDATING FOR MESHS WHICH ARE NOT A ON A PLANE 
+                //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline
                 foreach (var vertex in tmesh.Vertices) { CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
 
                 //generate streamline
