@@ -96,14 +96,14 @@ namespace LilyPad.Components.Setup
                 }
 
                 //alter vectors so they are in the "mathematical form" rather than the right-hand rule
-                Vector3d U1 = new Vector3d(iφc[p1].Y, -iφc[p1].X, 0.0);
-                Vector3d U2 = new Vector3d(iφmd[p2].Y, -iφmd[p2].X, 0.0);
-                Vector3d U3 = new Vector3d(iφc[p3].Y, -iφc[p3].X, 0.0);
-                Vector3d U4 = new Vector3d(iφmd[p4].Y, -iφmd[p4].X, 0.0);
-                Vector3d U5 = new Vector3d(iφmd[p5].Y, -iφmd[p5].X, 0.0);
-                Vector3d U6 = new Vector3d(iφc[p6].Y, -iφc[p6].X, 0.0);
-                Vector3d U7 = new Vector3d(iφmd[p7].Y, -iφmd[p7].X, 0.0);
-                Vector3d U8 = new Vector3d(iφc[p8].Y, -iφc[p8].X, 0.0);
+                Vector3d U1 = iφc[p1];
+                Vector3d U2 = iφmd[p2];
+                Vector3d U3 = iφc[p3];
+                Vector3d U4 = iφmd[p4];
+                Vector3d U5 = iφmd[p5];
+                Vector3d U6 = iφc[p6];
+                Vector3d U7 = iφmd[p7];
+                Vector3d U8 = iφc[p8];
 
                 //Create and analyse elements
                 Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);

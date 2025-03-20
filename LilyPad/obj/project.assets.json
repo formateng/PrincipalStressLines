@@ -1462,11 +1462,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matt C\\Documents\\LilyPad\\LilyPad.csproj",
+      "projectUniqueName": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\LilyPad.csproj",
       "projectName": "LilyPad",
-      "projectPath": "C:\\Users\\Matt C\\Documents\\LilyPad\\LilyPad.csproj",
+      "projectPath": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\LilyPad.csproj",
       "packagesPath": "C:\\Users\\Matt C\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matt C\\Documents\\LilyPad\\obj\\",
+      "outputPath": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

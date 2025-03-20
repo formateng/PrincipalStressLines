@@ -35,6 +35,7 @@ namespace LilyPad.Objects.ShapeFunction
         public Point3d P7;
         public Point3d P8;
         public double v;
+        public Plane ElementPlane;
 
         public int Direction;
 
@@ -137,24 +138,35 @@ namespace LilyPad.Objects.ShapeFunction
 
         public Quad8Element(Point3d p1, Point3d p2, Point3d p3, Point3d p4, Point3d p5, Point3d p6, Point3d p7, Point3d p8, Vector3d u1, Vector3d u2, Vector3d u3, Vector3d u4, Vector3d u5, Vector3d u6, Vector3d u7, Vector3d u8, double poissons)
         {
-            P1 = p1;
-            P2 = p2;
-            P3 = p3;
-            P4 = p4;
-            P5 = p5;
-            P6 = p6;
-            P7 = p7;
-            P8 = p8;
-            U1 = u1;
-            U2 = u2;
-            U3 = u3;
-            U4 = u4;
-            U5 = u5;
-            U6 = u6;
-            U7 = u7;
-            U8 = u8;
-            v = poissons;
+            // Calculate the element plane
 
+            ElementPlane = new Plane(p1, p3 - p1, p6 - p1);
+            //Plane elementPlane = Plane.WorldXY;
+
+            // Remap the points P1 to P8 from the world plane to the element plane
+            ElementPlane.RemapToPlaneSpace(p1, out P1);
+            ElementPlane.RemapToPlaneSpace(p2, out P2);
+            ElementPlane.RemapToPlaneSpace(p3, out P3);
+            ElementPlane.RemapToPlaneSpace(p4, out P4);
+            ElementPlane.RemapToPlaneSpace(p5, out P5);
+            ElementPlane.RemapToPlaneSpace(p6, out P6);
+            ElementPlane.RemapToPlaneSpace(p7, out P7);
+            ElementPlane.RemapToPlaneSpace(p8, out P8);
+
+
+            // Update the coordinates of U1 to U8 to reference the new plane
+            U1 = mathForm(projectVector(u1, ElementPlane));
+            U2 = mathForm(projectVector(u2, ElementPlane));
+            U3 = mathForm(projectVector(u3, ElementPlane));
+            U4 = mathForm(projectVector(u4, ElementPlane));
+            U5 = mathForm(projectVector(u5, ElementPlane));
+            U6 = mathForm(projectVector(u6, ElementPlane));
+            U7 = mathForm(projectVector(u7, ElementPlane));
+            U8 = mathForm(projectVector(u8, ElementPlane));
+
+
+
+            v = poissons;
             Direction = 0;
         }
 
@@ -380,8 +392,8 @@ namespace LilyPad.Objects.ShapeFunction
             CalculateTheta();
 
             //calculate the vector
-            if (Direction == 1) return new Vector3d(Math.Cos(Theta), Math.Sin(Theta), 0);
-            else if (Direction == 2) return new Vector3d(-Math.Sin(Theta), Math.Cos(Theta), 0);
+            if (Direction == 1) return projectVector(new Vector3d(Math.Cos(Theta), Math.Sin(Theta), 0), ElementPlane);
+            else if (Direction == 2) return projectVector(new Vector3d(-Math.Sin(Theta), Math.Cos(Theta), 0), ElementPlane);
             else return new Vector3d();
         }
 
@@ -409,6 +421,17 @@ namespace LilyPad.Objects.ShapeFunction
                 if (TauXY > 0) Theta -= Math.PI / 2;
                 else Theta += Math.PI / 2;
             }
+        }
+
+        private Vector3d projectVector(Vector3d vector, Plane plane)
+        {
+            return new Vector3d(vector * plane.XAxis, vector * plane.YAxis, vector * plane.ZAxis);
+        }
+
+        private Vector3d mathForm(Vector3d vector)
+        {
+            //alter vectors so they are in the "mathematical form" rather than the right-hand rule
+            return new Vector3d(vector.Y, -vector.X, 0.0);
         }
     }
 }
