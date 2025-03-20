@@ -1,7 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)rhinocommon\7.38.24338.17001\build\net48\RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon\7.38.24338.17001\build\net48\RhinoCommon.targets')" />
-    <Import Project="$(NuGetPackageRoot)grasshopper\7.38.24338.17001\build\net48\Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper\7.38.24338.17001\build\net48\Grasshopper.targets')" />
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net48' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\net462\System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\net462\System.Resources.Extensions.targets')" />
+    <Import Project="$(NuGetPackageRoot)rhinocommon\7.0.20314.3001\build\RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon\7.0.20314.3001\build\RhinoCommon.targets')" />
+    <Import Project="$(NuGetPackageRoot)grasshopper\7.0.20314.3001\build\Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper\7.0.20314.3001\build\Grasshopper.targets')" />
+  </ImportGroup>
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net7.0' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.collections.immutable\9.0.3\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets" Condition="Exists('$(NuGetPackageRoot)system.collections.immutable\9.0.3\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.reflection.metadata\9.0.3\buildTransitive\netcoreapp2.0\System.Reflection.Metadata.targets" Condition="Exists('$(NuGetPackageRoot)system.reflection.metadata\9.0.3\buildTransitive\netcoreapp2.0\System.Reflection.Metadata.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.formats.nrbf\9.0.3\buildTransitive\netcoreapp2.0\System.Formats.Nrbf.targets" Condition="Exists('$(NuGetPackageRoot)system.formats.nrbf\9.0.3\buildTransitive\netcoreapp2.0\System.Formats.Nrbf.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\netcoreapp2.0\System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\netcoreapp2.0\System.Resources.Extensions.targets')" />
+    <Import Project="$(NuGetPackageRoot)rhinocommon\8.0.23304.9001\build\net48\RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon\8.0.23304.9001\build\net48\RhinoCommon.targets')" />
+    <Import Project="$(NuGetPackageRoot)grasshopper\8.0.23304.9001\build\net48\Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper\8.0.23304.9001\build\net48\Grasshopper.targets')" />
+  </ImportGroup>
+  <ImportGroup Condition=" '$(TargetFramework)' == 'net7.0-windows' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.collections.immutable\9.0.3\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets" Condition="Exists('$(NuGetPackageRoot)system.collections.immutable\9.0.3\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.reflection.metadata\9.0.3\buildTransitive\netcoreapp2.0\System.Reflection.Metadata.targets" Condition="Exists('$(NuGetPackageRoot)system.reflection.metadata\9.0.3\buildTransitive\netcoreapp2.0\System.Reflection.Metadata.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.formats.nrbf\9.0.3\buildTransitive\netcoreapp2.0\System.Formats.Nrbf.targets" Condition="Exists('$(NuGetPackageRoot)system.formats.nrbf\9.0.3\buildTransitive\netcoreapp2.0\System.Formats.Nrbf.targets')" />
+    <Import Project="$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\netcoreapp2.0\System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions\9.0.3\buildTransitive\netcoreapp2.0\System.Resources.Extensions.targets')" />
+    <Import Project="$(NuGetPackageRoot)rhinocommon\8.0.23304.9001\build\net48\RhinoCommon.targets" Condition="Exists('$(NuGetPackageRoot)rhinocommon\8.0.23304.9001\build\net48\RhinoCommon.targets')" />
+    <Import Project="$(NuGetPackageRoot)grasshopper\8.0.23304.9001\build\net48\Grasshopper.targets" Condition="Exists('$(NuGetPackageRoot)grasshopper\8.0.23304.9001\build\net48\Grasshopper.targets')" />
   </ImportGroup>
 </Project>

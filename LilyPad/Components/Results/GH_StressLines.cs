@@ -85,7 +85,7 @@ namespace LilyPad.Components.Results
         {
             get
             {
-                return ResourceIcons.IconStressLines;
+                return Properties.Resources.IconStressLines;
             }
         }
 

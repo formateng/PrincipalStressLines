@@ -147,7 +147,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return ResourceIcons.IconSlabQuad8;
+                return Properties.Resources.IconSlabQuad8;
             }
         }
 

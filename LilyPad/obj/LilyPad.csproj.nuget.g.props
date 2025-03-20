@@ -13,4 +13,7 @@
     <SourceRoot Include="C:\Users\Matt C\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_NETFramework_ReferenceAssemblies_net48 Condition=" '$(PkgMicrosoft_NETFramework_ReferenceAssemblies_net48)' == '' ">C:\Users\Matt C\.nuget\packages\microsoft.netframework.referenceassemblies.net48\1.0.3</PkgMicrosoft_NETFramework_ReferenceAssemblies_net48>
+  </PropertyGroup>
 </Project>

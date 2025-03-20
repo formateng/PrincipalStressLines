@@ -1,69 +1,117 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <!-- Select the framework(s) you wish to target.
+        Rhino 6: net45
+        Rhino 7: net48
+        Rhino 8 Windows: net48, net7.0, net7.0-windows, net7.0-windows10.0.22000.0, etc
+        Rhino 8 Mac: net7.0, net7.0-macos, net7.0-macos12.0, etc
+    -->
+    <TargetFrameworks>net7.0-windows;net7.0;net48</TargetFrameworks>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <TargetExt>.gha</TargetExt>
+    <NoWarn>NU1701;NETSDK1086</NoWarn>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- Specifies information for Assembly and Yak -->
     <Version>1.0</Version>
     <Title>LilyPad</Title>
+    <Company>LilyPad Authors</Company>
     <Description>Description of LilyPad</Description>
-    <TargetExt>.gha</TargetExt>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <BaseOutputPath>C:\Users\Matt C\AppData\Roaming\Grasshopper\Libraries</BaseOutputPath>
   </PropertyGroup>
-	
-  <ItemGroup>
-    <None Remove="Resources\IconEvaluate_1.png" />
-    <None Remove="Resources\IconMembraneQuad4.png" />
-    <None Remove="Resources\IconMembraneQuad8.png" />
-    <None Remove="Resources\IconSlabQuad4.png" />
-    <None Remove="Resources\IconSlabQuad8.png" />
-    <None Remove="Resources\IconStressLine.png" />
-    <None Remove="Resources\IconStressLines.png" />
-    <None Remove="Resources\LilyPadIcon16x16.png" />
-    <None Remove="Resources\LilyPadIcon16x16_1.png" />
-    <None Remove="Resources\LilyPadIcon24x24.png" />
-    <None Remove="Resources\LilyPadIcon24x24_01.png" />
-    <None Remove="Resources\LilyPadIcon24x24_02.png" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\IconEvaluate_1.png" />
-    <EmbeddedResource Include="Resources\IconMembraneQuad4.png" />
-    <EmbeddedResource Include="Resources\IconMembraneQuad8.png" />
-    <EmbeddedResource Include="Resources\IconSlabQuad4.png" />
-    <EmbeddedResource Include="Resources\IconSlabQuad8.png" />
-    <EmbeddedResource Include="Resources\IconStressLine.png" />
-    <EmbeddedResource Include="Resources\IconStressLines.png" />
-    <EmbeddedResource Include="Resources\LilyPadIcon16x16.png" />
-    <EmbeddedResource Include="Resources\LilyPadIcon16x16_1.png" />
-    <EmbeddedResource Include="Resources\LilyPadIcon24x24.png" />
-    <EmbeddedResource Include="Resources\LilyPadIcon24x24_01.png" />
-    <EmbeddedResource Include="Resources\LilyPadIcon24x24_02.png" />
-  </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Grasshopper" Version="7.38.24338.17001" IncludeAssets="compile;build" />
-    <PackageReference Include="MathNet.Numerics" Version="4.8.0" />
+    <PackageReference Include="Grasshopper" Version="7.0.20314.3001" Condition="$(TargetFramework) == 'net48'" ExcludeAssets="runtime" />
+    <PackageReference Include="Grasshopper" Version="8.0.23304.9001" Condition="!$(TargetFramework.StartsWith('net4'))" ExcludeAssets="runtime" />
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.3" />
   </ItemGroup>
   
+  <!-- For Windows only builds -->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-windows')) or $(TargetFramework.StartsWith('net4'))">
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <!-- Reference WinForms for .NET 7.0 on macOS -->
+  <ItemGroup Condition="!($(TargetFramework.Contains('-windows')) or $(TargetFramework.StartsWith('net4')))">
+    <!-- Rhino 8.11 and later you can use this -->
+    <!-- <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" /> -->
+    
+    <!-- Rhino 8.10 and earlier -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" ExcludeAssets="all" GeneratePathProperty="true" />
+    <Reference Include="$(PkgMicrosoft_NETFramework_ReferenceAssemblies_net48)\build\.NETFramework\v4.8\System.Windows.Forms.dll" Private="False" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" ExcludeAssets="runtime" />
+  </ItemGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Triangle">
-      <HintPath>triangleNET\Triangle.dll</HintPath>
+      <HintPath>..\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Triangle.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
   <ItemGroup>
-    <Compile Update="ResourceIcons.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceIcons.resx</DependentUpon>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-  
   <ItemGroup>
-    <EmbeddedResource Update="ResourceIcons.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceIcons.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\IconEvaluate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconEvaluate_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconMembraneQuad4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconMembraneQuad8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconSlabQuad4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconSlabQuad8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconStressLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\IconStressLines.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon16x16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon16x16_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon16x16_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon24x24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon24x24_01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\LilyPadIcon24x24_02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopyPdbForMonoDebugging" AfterTargets="AfterBuild">
+    <!-- Enable debugging in Rhino 6/7 on Mac -->
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFiles="$(TargetDir)$(TargetName).gha.pdb" Condition="$([MSBuild]::IsOSPlatform(OSX)) and $(TargetFramework.StartsWith('net4')) and Exists('$(TargetDir)$(TargetName).pdb')" />
+  </Target>
 
 </Project>

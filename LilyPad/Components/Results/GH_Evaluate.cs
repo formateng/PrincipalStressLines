@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using LilyPad.Objects;
+using LilyPad.Properties;
 using Rhino.Geometry;
 
 
@@ -70,7 +71,7 @@ namespace LilyPad.Components.Results
         {
             get
             {
-                return ResourceIcons.IconEvaluate_1;
+                return Properties.Resources.IconEvaluate_1;
             }
         }
 

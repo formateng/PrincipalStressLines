@@ -119,7 +119,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return ResourceIcons.IconMembraneQuad4;
+                return Properties.Resources.IconMembraneQuad4;
             }
         }
 

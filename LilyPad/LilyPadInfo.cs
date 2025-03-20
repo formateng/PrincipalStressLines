@@ -1,17 +1,17 @@
-﻿using Grasshopper;
-using Grasshopper.Kernel;
-using MathNet.Numerics.Properties;
-using System;
+﻿using System;
 using System.Drawing;
+using Grasshopper;
+using Grasshopper.Kernel;
+using LilyPad.Properties;
 
 namespace LilyPad
 {
-    public class LilyPadInfo : GH_AssemblyInfo
-    {
+  public class LilyPadInfo : GH_AssemblyInfo
+  {
         public override string Name => "LilyPad";
 
         //Return a 24x24 pixel bitmap to represent this GHA library.
-        public override Bitmap Icon => ResourceIcons.LilyPadIcon24x24_02;
+        public override Bitmap Icon => Resources.LilyPadIcon24x24_02;
 
         //Return a short string describing the purpose of this GHA library.
         public override string Description => "";
@@ -23,15 +23,15 @@ namespace LilyPad
 
         //Return a string representing your preferred contact details.
         public override string AuthorContact => "";
-    }
-    /// <summary>
-    /// Add component icons
-    /// </summary>
+        //Return a string representing the version.  This returns the same version as the assembly.
+        public override string AssemblyVersion => GetType().Assembly.GetName().Version.ToString();
+  }
+
     public class LilyPadCategoryIcon : GH_AssemblyPriority
     {
         public override GH_LoadingInstruction PriorityLoad()
         {
-            Instances.ComponentServer.AddCategoryIcon("LilyPad", ResourceIcons.LilyPadIcon16x16_1);
+            Instances.ComponentServer.AddCategoryIcon("LilyPad", Resources.LilyPadIcon16x16_1);
             Instances.ComponentServer.AddCategorySymbolName("LilyPad", 'L');
             return GH_LoadingInstruction.Proceed;
         }
