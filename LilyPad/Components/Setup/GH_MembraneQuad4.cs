@@ -78,13 +78,13 @@ namespace LilyPad.Components.Setup
                 }
 
                 //Create and analyse elements
-                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, iU[p1], iU[p2], iU[p3], iU[p4], iV);
+                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, iU[p1], iU[p2], iU[p3], iU[p4], iV, true);
 
                 //output data
                 bilinearIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(bilinearIsoPara1));
 
-                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, iU[p1], iU[p2], iU[p3], iU[p4], iV);
+                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, iU[p1], iU[p2], iU[p3], iU[p4], iV, true);
 
                 bilinearIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(bilinearIsoPara2));

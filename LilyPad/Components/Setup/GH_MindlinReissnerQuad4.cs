@@ -79,19 +79,19 @@ namespace LilyPad.Components.Setup
                 }
 
                 //alter vectors so they are in the "mathematical form" rather than the right-hand rule
-                Vector3d U1 = new Vector3d(iφ[p1].Y, -iφ[p1].X, 0.0);
-                Vector3d U2 = new Vector3d(iφ[p2].Y, -iφ[p2].X, 0.0);
-                Vector3d U3 = new Vector3d(iφ[p3].Y, -iφ[p3].X, 0.0);
-                Vector3d U4 = new Vector3d(iφ[p4].Y, -iφ[p4].X, 0.0);
+                Vector3d U1 = iφ[p1];
+                Vector3d U2 = iφ[p2];
+                Vector3d U3 = iφ[p3];
+                Vector3d U4 = iφ[p4];
 
                 //Create and analyse elements
-                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV, false);
 
                 //output data
                 bilinearIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(bilinearIsoPara1));
 
-                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV);
+                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV, false);
 
                 bilinearIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(bilinearIsoPara2));

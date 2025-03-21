@@ -26,6 +26,8 @@ namespace LilyPad.Objects.ShapeFunction
         public Point3d P3;
         public Point3d P4;
         public double v;
+        public Plane ElementPlane;
+        public bool Inplane;
 
         public int Direction;
 
@@ -96,18 +98,41 @@ namespace LilyPad.Objects.ShapeFunction
             U4 = new Vector3d();
             v = 0.0;
             Direction = 0;
+            Inplane = true;
         }
 
-        public Quad4Element(Point3d p1, Point3d p2, Point3d p3, Point3d p4, Vector3d u1, Vector3d u2, Vector3d u3, Vector3d u4, double poissons)
+        public Quad4Element(Point3d p1, Point3d p2, Point3d p3, Point3d p4, Vector3d u1, Vector3d u2, Vector3d u3, Vector3d u4, double poissons, bool inplane)
         {
-            P1 = p1;
-            P2 = p2;
-            P3 = p3;
-            P4 = p4;
-            U1 = u1;
-            U2 = u2;
-            U3 = u3;
-            U4 = u4;
+            //Set Inplane value for element
+            Inplane = inplane;
+
+            // Calculate the element plane
+            ElementPlane = new Plane(p1, p2 - p1, p3 - p1);
+
+            // Remap the points P1 to P8 from the world plane to the element plane
+            ElementPlane.RemapToPlaneSpace(p1, out P1);
+            ElementPlane.RemapToPlaneSpace(p2, out P2);
+            ElementPlane.RemapToPlaneSpace(p3, out P3);
+            ElementPlane.RemapToPlaneSpace(p4, out P4);
+
+
+            // Update the coordinates of U1 to U8 to reference the new plane
+            //if the element type is in plane then only project the vector otherwise also change the X and Y values so they are aligned with the mathematical form
+            if (Inplane)
+            {
+                U1 = orientVector(u1, ElementPlane, Plane.WorldXY);
+                U2 = orientVector(u2, ElementPlane, Plane.WorldXY);
+                U3 = orientVector(u3, ElementPlane, Plane.WorldXY);
+                U4 = orientVector(u4, ElementPlane, Plane.WorldXY);
+            }
+            else
+            {
+                U1 = mathForm(orientVector(u1, ElementPlane, Plane.WorldXY));
+                U2 = mathForm(orientVector(u2, ElementPlane, Plane.WorldXY));
+                U3 = mathForm(orientVector(u3, ElementPlane, Plane.WorldXY));
+                U4 = mathForm(orientVector(u4, ElementPlane, Plane.WorldXY));
+            }
+
             v = poissons;
 
             Direction = 0;
@@ -298,8 +323,11 @@ namespace LilyPad.Objects.ShapeFunction
         }
 
 
-        public Vector3d Evaluate(Point3d location)
+        public Vector3d Evaluate(Point3d loc)
         {
+            Point3d location = new Point3d();
+            ElementPlane.RemapToPlaneSpace(loc, out location);
+
             NaturalCoordinate = CalculateNaturalCoordinate(location);
 
             //calculate the shape function values
@@ -315,8 +343,8 @@ namespace LilyPad.Objects.ShapeFunction
             CalculateTheta();
 
             //calculate the vector
-            if (Direction == 1) return new Vector3d(Math.Cos(Theta), Math.Sin(Theta), 0);
-            else if (Direction == 2) return new Vector3d(-Math.Sin(Theta), Math.Cos(Theta), 0);
+            if (Direction == 1) return  orientVector(new Vector3d(Math.Cos(Theta), Math.Sin(Theta), 0), Plane.WorldXY, ElementPlane);
+            else if (Direction == 2) return  orientVector(new Vector3d(-Math.Sin(Theta), Math.Cos(Theta), 0), Plane.WorldXY, ElementPlane);
             else return new Vector3d();
         }
 
@@ -345,6 +373,21 @@ namespace LilyPad.Objects.ShapeFunction
                 if (TauXY > 0) Theta -= Math.PI / 2;
                 else Theta += Math.PI / 2;
             }
+        }
+
+        //perform a cross project on the vector and each axis of the target plane so that the returned vector is given by the planes coordinate system
+        private Vector3d orientVector(Vector3d vector, Plane plane0, Plane plane1)
+        {
+            Transform orient = Transform.PlaneToPlane(plane0, plane1);
+            vector.Transform(orient);
+            return vector;
+        }
+
+        //alter vectors so they are in the "mathematical form" rather than the right-hand rule
+        private Vector3d mathForm(Vector3d vector)
+        {
+            //alter vectors so they are in the "mathematical form" rather than the right-hand rule
+            return new Vector3d(vector.Y, -vector.X, 0.0);
         }
 
     }

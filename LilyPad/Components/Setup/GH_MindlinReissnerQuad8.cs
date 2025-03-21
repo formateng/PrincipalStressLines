@@ -95,7 +95,7 @@ namespace LilyPad.Components.Setup
                     return;
                 }
 
-                //alter vectors so they are in the "mathematical form" rather than the right-hand rule
+                
                 Vector3d U1 = iφc[p1];
                 Vector3d U2 = iφmd[p2];
                 Vector3d U3 = iφc[p3];
@@ -106,13 +106,13 @@ namespace LilyPad.Components.Setup
                 Vector3d U8 = iφc[p8];
 
                 //Create and analyse elements
-                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
+                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV, false);
 
                 //output data
                 quadraticIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(quadraticIsoPara1));
 
-                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV);
+                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, U1, U2, U3, U4, U5, U6, U7, U8, iV, false);
 
                 quadraticIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(quadraticIsoPara2));
