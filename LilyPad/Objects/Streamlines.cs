@@ -18,7 +18,6 @@ namespace LilyPad.Objects
         PrincipalMesh PrincipalMesh;
         public Rhino.Geometry.Mesh Mesh;
         private Polyline[] NakedEdges;
-        private Plane MeshPlane;
         private TriangleNet.Geometry.InputGeometry TriGeom;
 
         //Variables_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -65,7 +64,6 @@ namespace LilyPad.Objects
             Mesh = principalMesh.Mesh;
             Mesh.FaceNormals.ComputeFaceNormals();
             NakedEdges = principalMesh.NakedEdges;
-            MeshPlane = principalMesh.MeshPlane;
         }
 
         /// <summary>
@@ -77,7 +75,6 @@ namespace LilyPad.Objects
             Mesh = principalMesh.Mesh;
             Mesh.FaceNormals.ComputeFaceNormals();
             NakedEdges = principalMesh.NakedEdges;
-            MeshPlane = principalMesh.MeshPlane;
 
             //import variables
             IStepSize = iStepSize;
@@ -165,7 +162,7 @@ namespace LilyPad.Objects
                 //get new seed
                 seed = seeds[0];
 
-                //test if seed is valid
+                //test if seed is valid for stream line seperation distance, if not remove seed
                 Vector3d radius1 = new Vector3d(DSep * 0.99, DSep * 0.99, DSep * 0.99);
                 BoundingBox testBox = new BoundingBox(seed - radius1, seed + radius1);
                 for (int i = 0; i < CheckPts.Count; i++)
@@ -218,6 +215,7 @@ namespace LilyPad.Objects
 
                     //offset pt by the streamline direction rotated by 90 degrees in both directions
                     streamlineDirection.Rotate(Math.PI / 2, Mesh.FaceNormals[meshPt.FaceIndex]); ;
+                            //*****FIX***** seed 1 and 2 need to be placed on the mesh
                     Point3d seed1 = pt + streamlineDirection / streamlineDirection.Length * DSep;
                     streamlineDirection.Rotate(Math.PI, Mesh.FaceNormals[meshPt.FaceIndex]); ;
                     Point3d seed2 = pt + streamlineDirection / streamlineDirection.Length * DSep;
@@ -244,16 +242,31 @@ namespace LilyPad.Objects
         /// <exception cref="ArgumentException"></exception>
         private void FarthestSteamlines(Point3d seed)
         {
-            //test if mesh is planar
-            double testDistTo = 0.0;
-            for (int i = 3; i < Mesh.Faces.Count; i++)
+            // Error test: test if mesh is planar and in the WORLDXY plane
+            for (int i = 0; i < Mesh.Faces.Count; i++)
             {
                 MeshFace face = Mesh.Faces[i];
-                Point3d centre = Mesh.Vertices[face.A] + Mesh.Vertices[face.B] + Mesh.Vertices[face.C] + Mesh.Vertices[face.D];
-                centre /= 4;
-                testDistTo += Math.Abs(MeshPlane.DistanceTo(centre));
+                Point3d[] vertices = new Point3d[]
+                {
+                    Mesh.Vertices[face.A],
+                    Mesh.Vertices[face.B],
+                    Mesh.Vertices[face.C],
+                    face.IsQuad ? Mesh.Vertices[face.D] : Mesh.Vertices[face.C]
+                };
+
+                Plane facePlane;
+                double planeDeviation=0.001;
+                PlaneFitResult planeFitResult = Plane.FitPlaneToPoints(vertices, out facePlane, out planeDeviation);
+                if (planeFitResult != 0 || planeDeviation>0.001)
+                {
+                    throw new NotImplementedException("Farthest point seeding method is not yet implemented for non-planar mesh faces.");
+                }
+
+                if ((facePlane.Normal.IsParallelTo(Vector3d.ZAxis) == 0))
+                {
+                    throw new NotImplementedException("Farthest point seeding method is not yet implemented for mesh faces not in the WORLDXY plane.");
+                }
             }
-            if (testDistTo > 0.0001) throw new NotImplementedException("Farthest point seeding method is not yet implement for non-Planar Meshes");
 
             //new parameters
             Polyline activeStreamline = new Polyline();

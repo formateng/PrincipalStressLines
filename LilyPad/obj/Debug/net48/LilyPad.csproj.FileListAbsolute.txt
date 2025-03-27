@@ -75,3 +75,42 @@ C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\Li
 C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.Up2Date
 C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.gha
 C:\Users\Matt C\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.pdb
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconEvaluate.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconEvaluate_1.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconMembraneQuad4.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconMembraneQuad8.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconSlabQuad4.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconSlabQuad8.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconStressLine.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\IconStressLines.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon16x16.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon16x16_1.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon16x16_2.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon24x24.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon24x24_01.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Resources\LilyPadIcon24x24_02.png
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\LilyPad.gha
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\LilyPad.pdb
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Microsoft.Bcl.HashCode.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Buffers.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Collections.Immutable.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Formats.Nrbf.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Memory.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Numerics.Vectors.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Reflection.Metadata.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Resources.Extensions.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.ValueTuple.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\MathNet.Numerics.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Triangle.dll
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.AssemblyReference.cache
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.Properties.Resources.resources
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.GenerateResource.cache
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfoInputs.cache
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.AssemblyInfo.cs
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.CoreCompileInputs.cache
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.sourcelink.json
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.Up2Date
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.gha
+C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.pdb

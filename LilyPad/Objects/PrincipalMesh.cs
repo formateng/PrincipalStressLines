@@ -20,7 +20,6 @@ namespace LilyPad.Objects
         public FieldMesh FieldMesh;
         public Mesh Mesh;
         public Polyline[] NakedEdges;
-        public Plane MeshPlane;
 
         //Constructors
 
@@ -36,7 +35,6 @@ namespace LilyPad.Objects
             FieldMesh = fieldMesh;
             Mesh = fieldMesh.Mesh;
             NakedEdges = fieldMesh.NakedEdges;
-            MeshPlane = fieldMesh.MeshPlane;
         }
 
         //Methods
