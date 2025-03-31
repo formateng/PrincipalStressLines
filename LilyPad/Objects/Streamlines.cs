@@ -215,7 +215,6 @@ namespace LilyPad.Objects
 
                     //offset pt by the streamline direction rotated by 90 degrees in both directions
                     streamlineDirection.Rotate(Math.PI / 2, Mesh.FaceNormals[meshPt.FaceIndex]); ;
-                            //*****FIX***** seed 1 and 2 need to be placed on the mesh
                     Point3d seed1 = pt + streamlineDirection / streamlineDirection.Length * DSep;
                     streamlineDirection.Rotate(Math.PI, Mesh.FaceNormals[meshPt.FaceIndex]); ;
                     Point3d seed2 = pt + streamlineDirection / streamlineDirection.Length * DSep;
@@ -467,7 +466,7 @@ namespace LilyPad.Objects
                     }
 
                     //test for looping stressline
-                    if (streamlineSegment.Length > 3 * IStepSize && End.DistanceTo(streamlineSegment[0]) < StepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1 * Math.PI)
+                    if (streamlineSegment.Length > 3 * IStepSize && End.DistanceTo(streamlineSegment[0]) < IStepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1 * Math.PI)
                     {
                         streamlineSegment.Add(streamlineSegment[0]);
                         return streamlineSegment;
@@ -694,6 +693,7 @@ namespace LilyPad.Objects
 
             //find final location
             end = start + (vectorFromStart + 2 * vectorFromPoint1 + 2 * vectorFromPoint2 + vectorFromPoint3) / 6;
+            end = Mesh.ClosestPoint(end); //this is to prevent the streamline from going off the mesh
 
             //evaluate end point
             Vector3d vectorAtEnd = Evaluate(end);
