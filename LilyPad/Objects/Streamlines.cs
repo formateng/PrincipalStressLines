@@ -1,4 +1,13 @@
-﻿using System;
+﻿///summary
+///this class is focused on creating steamlines for a given principal mesh.
+///There are two main capabilities:
+///Creating single streamlines from a seed point.
+///Creating a series of streamlines from a seed point for the first streamline using possible two seeding methods to create the rest of the streamlines.
+///This class is reliant on Evaluate method of the PrincipalMesh class to determine the direction of the field at any one point.
+///summary
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -99,7 +108,7 @@ namespace LilyPad.Objects
             //Creates first part of streamline from the seed in first direction
             Polyline segment1 = CreateStreamlineSegment(1);
 
-            if (segment1.IsClosed) goto LOOPDETECTED;
+            if (segment1.IsClosed){ return segment1; }
 
             //reset variables
             Point = seed;
@@ -108,15 +117,15 @@ namespace LilyPad.Objects
 
             //Creates second part of streamline from the seed in second direction
             Polyline segment2 = CreateStreamlineSegment(-1);
+            if (segment2.IsClosed) { return segment2; }
 
             //attach segment2 to segment1
             segment2.RemoveAt(0);
             segment2.Reverse();
             segment1.InsertRange(0, segment2);
 
-        LOOPDETECTED:;
-            //return the whole streamline contained in segement1
             return segment1;
+            
         }
 
         /// <summary>
@@ -465,12 +474,29 @@ namespace LilyPad.Objects
                         test = AddInNewPoint(streamlineSegment);
                     }
 
-                    //test for looping stressline
-                    if (streamlineSegment.Length > 3 * IStepSize && End.DistanceTo(streamlineSegment[0]) < IStepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1 * Math.PI)
+                    //test for looping stresslines based on latest point getting close too the start point
+                    if (streamlineSegment.Length > 3 * IStepSize && Math.Abs(Vector3d.VectorAngle(vecFirst, Vec1)) < 0.1 * Math.PI && End.DistanceTo(streamlineSegment[0]) < IStepSize)
                     {
                         streamlineSegment.Add(streamlineSegment[0]);
                         return streamlineSegment;
                     }
+
+                    //second test for looping which detects spiraling. If the latest point gets too close to any previous point (excluding the previous 2*StepSize/IStepSize points), then remove all the points before the closest point and close the streamline.
+                    else if (streamlineSegment.Length > 3 * IStepSize && streamlineSegment.Count >= 10)
+                    {
+                        int rangeStart = streamlineSegment.Count - 10;
+                        for (int j = rangeStart; j >= 0; j--)
+                        {
+                            double dist = streamlineSegment[j].DistanceTo(End);
+                            if (dist < StepSize)
+                            {
+                                streamlineSegment.RemoveRange(0, j);
+                                streamlineSegment.Add(streamlineSegment[0]);
+                                return streamlineSegment;
+                            }
+                        }
+                    }
+
                 }
 
                 //prevent infinte loops
