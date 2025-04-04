@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
 using LilyPad.Objects.ShapeFunction;
+using LilyPad.Objects.NthOrder;
 
 namespace LilyPad.Objects
 {
@@ -18,6 +19,7 @@ namespace LilyPad.Objects
         //Properties
         int Type;
         public FieldMesh FieldMesh;
+        public VectorMesh VectorMesh;
         public Mesh Mesh;
         public Polyline[] NakedEdges;
 
@@ -26,6 +28,15 @@ namespace LilyPad.Objects
         public PrincipalMesh()
         {
             Type = 0;
+        }
+
+        //constructor for creating a principal mesh from a VectorMesh
+        public PrincipalMesh(VectorMesh vectorMesh)
+        {
+            Type = 1;
+            VectorMesh = vectorMesh;
+            Mesh = vectorMesh.Mesh;
+            NakedEdges = vectorMesh.NakedEdges;
         }
 
         //constructor for creating a principal mesh from a FieldMesh - previous version also had a constructor for the vector mesh type
@@ -40,7 +51,8 @@ namespace LilyPad.Objects
         //Methods
         public bool Evaluate(Point3d location, ref Vector3d vector)
         {
-            if (Type == 2) return FieldMesh.Evaluate(location, ref vector);
+            if (Type == 1) return VectorMesh.Evaluate(location, ref vector);
+            else if (Type == 2) return FieldMesh.Evaluate(location, ref vector);
             else return false;
         }
     }
