@@ -103,21 +103,34 @@ namespace LilyPad.Objects.NthOrder
                 if (box.Contains(Centres[i])) contains.Add(i);
             }
 
-            //find closest vector
-            double closestDist = Radius;
-            Vector3d closestVec = new Vector3d();
-            for (int i = 0; i < contains.Count; i++)
-            {
-                dist = location.DistanceTo(Centres[contains[i]]);
-                if (dist < closestDist)
-                {
-                    closestDist = dist;
-                    closestVec = Principals[contains[i]];
-                }
-            }
-
+            ////find closest vector
+            //double closestDist = Radius;
+            //Vector3d closestVec = new Vector3d();
+            //for (int i = 0; i < contains.Count; i++)
+            //{
+            //    dist = location.DistanceTo(Centres[contains[i]]);
+            //    if (dist < closestDist)
+            //    {
+            //        closestDist = dist;
+            //        closestVec = Principals[contains[i]];
+            //    }
+            //}
             Vector3d cumulVector = new Vector3d();
             double cumulWeight = 0.0;
+            for (int i = 0; i < contains.Count; i++)
+            {
+                int j = contains[i];
+                dist = location.DistanceTo(Centres[j]);
+                if (dist <= Radius)
+                {
+                    cumulVector += -Principals[j];
+                    cumulWeight += (Radius - dist);
+                }
+            }
+            Vector3d closestVec = cumulVector;
+
+            cumulVector = new Vector3d();
+            cumulWeight = 0.0;
             for (int i = 0; i < contains.Count; i++)
             {
                 int j = contains[i];

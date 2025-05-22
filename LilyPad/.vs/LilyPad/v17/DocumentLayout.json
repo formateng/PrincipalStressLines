@@ -3,36 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\tri6element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\tri6element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\tri3element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\tri3element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\quad8element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\quad8element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\quad4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\quad4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\streamlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\fieldmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\fieldmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\principalmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\principalmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\quad4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\quad4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\components\\setup\\gh_membranetri6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,6 +17,30 @@
     {
       "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\nthorder\\vectormesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\nthorder\\vectormesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\tri3element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\tri3element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\quad8element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\quad8element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\tri6element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\tri6element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\shapefunction\\fieldmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\shapefunction\\fieldmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\objects\\principalmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|solutionrelative:objects\\principalmesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E62D46F-B7A1-49D3-9300-9C08AAFC5C7B}|LilyPad.csproj|c:\\users\\matt c\\documents\\github\\principalstresslines\\lilypad\\components\\setup\\gh_mindlinreissnerquad4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,8 +110,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 172,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 277,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -131,28 +131,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Element.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Element.cs",
-              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Element.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Element.cs",
-              "RelativeToolTip": "Objects\\ShapeFunction\\Element.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAIAwwDUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T15:56:38.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "VectorMesh.cs",
               "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\NthOrder\\VectorMesh.cs",
               "RelativeDocumentMoniker": "Objects\\NthOrder\\VectorMesh.cs",
               "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\NthOrder\\VectorMesh.cs",
               "RelativeToolTip": "Objects\\NthOrder\\VectorMesh.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAgwIAAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAkwIMAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T15:53:50.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GH_MembraneTri6.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MembraneTri6.cs",
+              "RelativeDocumentMoniker": "Components\\Setup\\GH_MembraneTri6.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MembraneTri6.cs",
+              "RelativeToolTip": "Components\\Setup\\GH_MembraneTri6.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAkwCAAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T16:55:39.786Z",
               "EditorCaption": ""
             },
             {
@@ -165,20 +165,19 @@
               "RelativeToolTip": "Components\\Setup\\GH_MembraneQuad4.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAwwH8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T22:11:48.026Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T22:11:48.026Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "GH_MembraneTri6.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MembraneTri6.cs",
-              "RelativeDocumentMoniker": "Components\\Setup\\GH_MembraneTri6.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MembraneTri6.cs",
-              "RelativeToolTip": "Components\\Setup\\GH_MembraneTri6.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAkwF8AAABzAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Element.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Element.cs",
+              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Element.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Element.cs",
+              "RelativeToolTip": "Objects\\ShapeFunction\\Element.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAIA/wDUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T16:55:39.786Z",
+              "WhenOpened": "2025-05-21T15:56:38.439Z",
               "EditorCaption": ""
             },
             {
@@ -191,8 +190,7 @@
               "RelativeToolTip": "Components\\Setup\\GH_MindlinReissnerQuad8.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAkwHQAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T12:58:06.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T12:58:06.207Z"
             },
             {
               "$type": "Document",
@@ -204,8 +202,7 @@
               "RelativeToolTip": "Components\\Setup\\GH_MembraneTri3.cs",
               "ViewState": "AgIAAGQAAAAAAAAAAAAkwHQAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T15:42:40.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T15:42:40.659Z"
             },
             {
               "$type": "Document",
@@ -222,46 +219,59 @@
           ]
         },
         {
-          "DockedWidth": 416,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 311,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Tri6Element.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri6Element.cs",
-              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Tri6Element.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri6Element.cs",
-              "RelativeToolTip": "Objects\\ShapeFunction\\Tri6Element.cs",
-              "ViewState": "AgIAAIMBAAAAAAAAAAAYwJwBAAAJAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Quad4Element.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad4Element.cs",
+              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Quad4Element.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad4Element.cs",
+              "RelativeToolTip": "Objects\\ShapeFunction\\Quad4Element.cs",
+              "ViewState": "AgIAAGABAAAAAAAAAAAmwGoBAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T16:45:05.235Z",
+              "WhenOpened": "2025-04-03T16:45:54.853Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Streamlines.cs",
               "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\Streamlines.cs",
               "RelativeDocumentMoniker": "Objects\\Streamlines.cs",
               "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\Streamlines.cs",
               "RelativeToolTip": "Objects\\Streamlines.cs",
-              "ViewState": "AgIAAHYBAAAAAAAAAAAQwI0BAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAnwIcBAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-20T15:51:18.14Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "GH_MindlinReissnerQuad4.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MindlinReissnerQuad4.cs",
-              "RelativeDocumentMoniker": "Components\\Setup\\GH_MindlinReissnerQuad4.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MindlinReissnerQuad4.cs",
-              "RelativeToolTip": "Components\\Setup\\GH_MindlinReissnerQuad4.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAIwGgAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "Tri3Element.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri3Element.cs",
+              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Tri3Element.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri3Element.cs",
+              "RelativeToolTip": "Objects\\ShapeFunction\\Tri3Element.cs",
+              "ViewState": "AgIAAD4BAAAAAAAAAAAAwDsBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T12:57:01.737Z",
+              "WhenOpened": "2025-05-21T15:27:29.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Quad8Element.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad8Element.cs",
+              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Quad8Element.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad8Element.cs",
+              "RelativeToolTip": "Objects\\ShapeFunction\\Quad8Element.cs",
+              "ViewState": "AgIAAJ0BAAAAAAAAAAAgwMABAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-20T14:22:53.966Z",
               "EditorCaption": ""
             },
             {
@@ -274,51 +284,36 @@
               "RelativeToolTip": "Components\\Results\\GH_Evaluate.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAYwDIAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T12:56:07.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T12:56:07.042Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Tri3Element.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri3Element.cs",
-              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Tri3Element.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri3Element.cs",
-              "RelativeToolTip": "Objects\\ShapeFunction\\Tri3Element.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAgwJMAAAAdAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "GH_MindlinReissnerQuad4.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MindlinReissnerQuad4.cs",
+              "RelativeDocumentMoniker": "Components\\Setup\\GH_MindlinReissnerQuad4.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Components\\Setup\\GH_MindlinReissnerQuad4.cs",
+              "RelativeToolTip": "Components\\Setup\\GH_MindlinReissnerQuad4.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAIwGgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T15:27:29.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Quad8Element.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad8Element.cs",
-              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Quad8Element.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad8Element.cs",
-              "RelativeToolTip": "Objects\\ShapeFunction\\Quad8Element.cs",
-              "ViewState": "AgIAAGABAAAAAAAAAAAQwDcBAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T14:22:53.966Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Quad4Element.cs",
-              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad4Element.cs",
-              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Quad4Element.cs",
-              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Quad4Element.cs",
-              "RelativeToolTip": "Objects\\ShapeFunction\\Quad4Element.cs",
-              "ViewState": "AgIAAAsBAAAAAAAAAAAswKMAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T16:45:54.853Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T12:57:01.737Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "Tri6Element.cs",
+              "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri6Element.cs",
+              "RelativeDocumentMoniker": "Objects\\ShapeFunction\\Tri6Element.cs",
+              "ToolTip": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\Tri6Element.cs",
+              "RelativeToolTip": "Objects\\ShapeFunction\\Tri6Element.cs",
+              "ViewState": "AgIAAIMBAAAAAAAAAAAYwI8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T16:45:05.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "PrincipalMesh.cs",
               "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\PrincipalMesh.cs",
               "RelativeDocumentMoniker": "Objects\\PrincipalMesh.cs",
@@ -326,12 +321,11 @@
               "RelativeToolTip": "Objects\\PrincipalMesh.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAAADYAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T15:51:18.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T15:51:18.154Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "FieldMesh.cs",
               "DocumentMoniker": "C:\\Users\\Matt C\\Documents\\GitHub\\PrincipalStressLines\\LilyPad\\Objects\\ShapeFunction\\FieldMesh.cs",
               "RelativeDocumentMoniker": "Objects\\ShapeFunction\\FieldMesh.cs",
@@ -339,8 +333,7 @@
               "RelativeToolTip": "Objects\\ShapeFunction\\FieldMesh.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAQwDoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T22:07:51.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T22:07:51.396Z"
             },
             {
               "$type": "Document",
@@ -352,8 +345,7 @@
               "RelativeToolTip": "Components\\Setup\\GH_MembraneQuad8.cs",
               "ViewState": "AgIAAE4AAAAAAAAAAAAIwHEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T12:56:55.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T12:56:55.498Z"
             },
             {
               "$type": "Document",

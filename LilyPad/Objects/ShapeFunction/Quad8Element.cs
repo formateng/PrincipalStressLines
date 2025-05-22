@@ -435,12 +435,16 @@ namespace LilyPad.Objects.ShapeFunction
 
         private void CalculateTheta()
         {
-            Theta = Math.Atan(2 * TauXY / (SigmaX - SigmaY)) / 2;
-
-            if (SigmaY > (SigmaX + SigmaY) / 2)
+            if (SigmaX == SigmaY) { Theta = 0.0; }
+            else
             {
-                if (TauXY > 0) Theta -= Math.PI / 2;
-                else Theta += Math.PI / 2;
+                Theta = Math.Atan(2 * TauXY / (SigmaX - SigmaY)) / 2;
+
+                if (SigmaY > (SigmaX + SigmaY) / 2)
+                {
+                    if (TauXY > 0) Theta -= Math.PI / 2;
+                    else Theta += Math.PI / 2;
+                }
             }
         }
 
