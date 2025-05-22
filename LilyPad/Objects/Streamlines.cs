@@ -488,11 +488,18 @@ namespace LilyPad.Objects
                         for (int j = rangeStart; j >= 0; j--)
                         {
                             double dist = streamlineSegment[j].DistanceTo(End);
+                            // if the end of the streamline is within the step size of the streamline carry on testing
                             if (dist < StepSize)
                             {
-                                streamlineSegment.RemoveRange(0, j);
-                                streamlineSegment.Add(streamlineSegment[0]);
-                                return streamlineSegment;
+                                Vector3d vecJ = new Vector3d(streamlineSegment[j + 1] - streamlineSegment[j]);
+                                // if the point within the stepsize of the end is also nearly parallel with the latest vector then:
+                                if (Math.Abs(Vector3d.VectorAngle(vecJ, Vec1)) < 0.1 * Math.PI)
+                                {
+                                    //remove all points before the point which is within the stepsize
+                                    streamlineSegment.RemoveRange(0, j);
+                                    streamlineSegment.Add(streamlineSegment[0]);
+                                    return streamlineSegment;
+                                }
                             }
                         }
                     }

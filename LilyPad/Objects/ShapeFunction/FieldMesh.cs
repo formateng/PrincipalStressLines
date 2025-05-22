@@ -34,13 +34,13 @@ namespace LilyPad.Objects.ShapeFunction
 
             MeshPlane = new Plane(Mesh.Vertices[0], Mesh.Vertices[1], Mesh.Vertices[2]);
 
-            //Test if mesh is planar
-            double testPlaneDist = 0.0;
-            for (int i = 3; i < Mesh.Vertices.Count; i++)
-            {
-                testPlaneDist += MeshPlane.DistanceTo(Mesh.Vertices[i]);
-            }
-            if (testPlaneDist > 0.0001) throw new NotImplementedException("Curret functionality only works for planar meshes");
+            ////Test if mesh is planar
+            //double testPlaneDist = 0.0;
+            //for (int i = 3; i < Mesh.Vertices.Count; i++)
+            //{
+            //    testPlaneDist += MeshPlane.DistanceTo(Mesh.Vertices[i]);
+            //}
+            //if (testPlaneDist > 0.0001) throw new NotImplementedException("Curret functionality only works for planar meshes");
         }
 
         //Methods

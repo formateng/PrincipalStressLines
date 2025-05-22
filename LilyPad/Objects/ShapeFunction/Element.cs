@@ -15,6 +15,8 @@ namespace LilyPad.Objects.ShapeFunction
         //Properties
 
         int Type;
+        Tri3Element Tri3Element;
+        Tri6Element Tri6Element;
         Quad4Element Quad4Element;
         Quad8Element Quad8Element;
 
@@ -26,21 +28,34 @@ namespace LilyPad.Objects.ShapeFunction
 
         public Element(Quad4Element quad4Element)
         {
-            Type = 1;
+            Type = 4;
             Quad4Element = quad4Element;
         }
         public Element(Quad8Element quad8Element)
         {
-            Type = 2;
+            Type = 8;
             Quad8Element = quad8Element;
+        }
+        public Element(Tri3Element tri3Element)
+        {
+            Type = 3;
+            Tri3Element = tri3Element;
+        }
+
+        public Element(Tri6Element tri6Element)
+        {
+            Type = 6;
+            Tri6Element = tri6Element;
         }
 
         //Methods
 
         public Vector3d Evaluate(Point3d location)
         {
-            if (Type == 1) return Quad4Element.Evaluate(location);
-            else if (Type == 2) return Quad8Element.Evaluate(location);
+            if (Type == 4) return Quad4Element.Evaluate(location);
+            else if (Type == 8) return Quad8Element.Evaluate(location);
+            else if (Type == 3) return Tri3Element.Evaluate(location);
+            else if (Type == 6) return Tri6Element.Evaluate(location);
             else return new Vector3d();
         }
     }
