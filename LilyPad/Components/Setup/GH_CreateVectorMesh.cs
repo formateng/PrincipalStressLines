@@ -27,15 +27,16 @@ namespace LilyPad.Components.Setup
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddMeshParameter("Mesh", "M", "Mesh of principal domain", GH_ParamAccess.item);
-            pManager.AddVectorParameter("Vectors", "V", "Principle direction at the centre of each face - add only one principal direction", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Radius", "R", "Radius used for vector interpolation", GH_ParamAccess.item);
+            pManager.AddVectorParameter("Vectors 1st", "V1", "Principle direction at the centre of each face - In the FIRST principal direction", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Vectors 2nd", "V2", "Principle direction at the centre of each face - In the SECOND principal direction", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Radius", "R", "Radius used for vector smoothing", GH_ParamAccess.item);
         }
 
         /// Register all output parameters.
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            //pManager.AddParameter(new GH_Param_PrincipalMesh(), "PrincipalMesh", "M", "Mesh with stored pricipal directions information", GH_ParamAccess.item);
-            pManager.AddGenericParameter("PrincipalMesh", "M", "Mesh with stored principal directions information", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Principle Direction 1", "P1", "A vector field showing the first principle direction", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Principle Direction 2", "P2", "A vector field showing the second principle direction", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -45,21 +46,26 @@ namespace LilyPad.Components.Setup
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Mesh iMesh = new Mesh();
-            List<Vector3d> iVectors = new List<Vector3d>();
+            List<Vector3d> iVectors1 = new List<Vector3d>();
+            List<Vector3d> iVectors2 = new List<Vector3d>();
             double iRadius = 0.0;
 
             DA.GetData(0, ref iMesh);
-            DA.GetDataList(1, iVectors);
-            DA.GetData(2, ref iRadius);
+            DA.GetDataList(1, iVectors1);
+            DA.GetDataList(2, iVectors2);
+            DA.GetData(3, ref iRadius);
 
             //_________________________________________________________________________________
 
-            VectorMesh vectorMesh = new VectorMesh(iMesh, iVectors, iRadius);
-            PrincipalMesh oMesh = new PrincipalMesh(vectorMesh);
+            VectorMesh vectorMesh1 = new VectorMesh(iMesh, iVectors1, iRadius);
+            VectorMesh vectorMesh2 = new VectorMesh(iMesh, iVectors2, iRadius);
+            PrincipalMesh oSigma1 = new PrincipalMesh(vectorMesh1);
+            PrincipalMesh oSigma2 = new PrincipalMesh(vectorMesh2);
 
             //___________________________________________________________________________________
 
-            DA.SetData(0, oMesh);
+            DA.SetData(0, oSigma1);
+            DA.SetData(1, oSigma2);
         }
 
 
