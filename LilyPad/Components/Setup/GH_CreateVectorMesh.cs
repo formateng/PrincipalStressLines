@@ -35,8 +35,8 @@ namespace LilyPad.Components.Setup
         /// Register all output parameters.
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Principle Direction 1", "P1", "A vector field showing the first principle direction", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Principle Direction 2", "P2", "A vector field showing the second principle direction", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Principal Direction 1", "P1", "A vector field showing the first principle direction", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Principal Direction 2", "P2", "A vector field showing the second principle direction", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -74,9 +74,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.VectorMesh;
             }
         }
 

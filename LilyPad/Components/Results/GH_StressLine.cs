@@ -26,7 +26,6 @@ namespace LilyPad.Components.Results
             pManager.AddGenericParameter("Principal Mesh", "Mesh", "Principal mesh to analyse", GH_ParamAccess.item);
             pManager.AddPointParameter("Seed", "S", "Point which the streamline passes through", GH_ParamAccess.item);
             pManager.AddNumberParameter("Step Tolerance", "T", "Size of the step between successive points", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Integration Method", "IM", "Integration method used to generate the streamline: 'Euler=1' 'RK2=2' 'RK3=3' 'RK4=4'", GH_ParamAccess.item, 1.0);
             pManager.AddNumberParameter("Max. Error", "Err", "If value > 0 then an adaptive step procedure is used where the step size is decreased if the estimated integration error is more than the specified value", GH_ParamAccess.item, 0.5 * Math.PI);
         }
 
@@ -50,21 +49,20 @@ namespace LilyPad.Components.Results
             PrincipalMesh iPrincipalMesh = new PrincipalMesh();
             Point3d iSeed = new Point3d();
             double iStepSize = 0.0;
-            double iMethod = 0;
-            double iMaxAngle = 0.0;
+            double iMethod = 4;
+            double iMaxError = 0.0;
 
 
             DA.GetData(0, ref objWrapPrinciMesh);
             DA.GetData(1, ref iSeed);
             DA.GetData(2, ref iStepSize);
-            DA.GetData(3, ref iMethod);
-            DA.GetData(4, ref iMaxAngle);
+            DA.GetData(3, ref iMaxError);
 
             if (objWrapPrinciMesh != null)
                 iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;
 
             //_________________________________________________________________________________
-            Streamlines streamlines = new Streamlines(iPrincipalMesh, iStepSize, Convert.ToInt32(iMethod), iMaxAngle, 0.0);
+            Streamlines streamlines = new Streamlines(iPrincipalMesh, iStepSize, Convert.ToInt32(iMethod), iMaxError, 0.0);
 
             Polyline oStressLine = streamlines.CreateStreamline(iSeed);
 
