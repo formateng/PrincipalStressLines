@@ -62,18 +62,27 @@ namespace LilyPad.Objects
         public Streamlines()
         {
             PrincipalMesh = new PrincipalMesh();
+            CompletedStreamlines = new List<Polyline>();
+            UsedSeeds = new List<Point3d>();
+            CheckPts = new List<Point3d>();
+            TriGeom = new TriangleNet.Geometry.InputGeometry();
+            NakedEdges = new Polyline[0];
         }
 
-        /// <summary>
-        /// creates a new streamline class, importing data of a given principalMesh
-        /// </summary>
-        public Streamlines(PrincipalMesh principalMesh)
-        {
-            PrincipalMesh = principalMesh;
-            Mesh = principalMesh.Mesh;
-            Mesh.FaceNormals.ComputeFaceNormals();
-            NakedEdges = principalMesh.NakedEdges;
-        }
+        ///// <summary>
+        ///// creates a new streamline class, importing data of a given principalMesh
+        ///// </summary>
+        //public Streamlines(PrincipalMesh principalMesh)
+        //{
+        //    PrincipalMesh = principalMesh;
+        //    Mesh = principalMesh.Mesh;
+        //    Mesh.FaceNormals.ComputeFaceNormals();
+        //    NakedEdges = principalMesh.NakedEdges;
+        //    CompletedStreamlines = new List<Polyline>();
+        //    UsedSeeds = new List<Point3d>();
+        //    CheckPts = new List<Point3d>();
+        //    TriGeom = new TriangleNet.Geometry.InputGeometry();
+        //}
 
         /// <summary>
         /// creates a new streamline class, importing data of a given principalMesh
@@ -84,6 +93,12 @@ namespace LilyPad.Objects
             Mesh = principalMesh.Mesh;
             Mesh.FaceNormals.ComputeFaceNormals();
             NakedEdges = principalMesh.NakedEdges;
+
+
+            CompletedStreamlines = new List<Polyline>();
+            UsedSeeds = new List<Point3d>();
+            CheckPts = new List<Point3d>();
+            TriGeom = new TriangleNet.Geometry.InputGeometry();
 
             //import variables
             IStepSize = iStepSize;
@@ -304,17 +319,16 @@ namespace LilyPad.Objects
             // InitialTriangulate boundary polyline
             TriangleNet.Mesh tmesh = InitialTriangulate(boundPolyline);
 
-            List<Circle> circles = default;
+            List<Circle> circles = new List<Circle>();
             int limit = 100;
 
             for (int i = 0; i < limit; i++) //REMOVE HARD STOP
             {
-                //Add tmesh vertices into the checkPts list so that the streamline ends if it is too close to another streamline - THIS NEEDS UPDATING FOR MESHS WHICH ARE NOT A ON A PLANE 
-                foreach (var vertex in tmesh.Vertices) { CheckPts.Add(new Point3d(vertex.X, vertex.Y, 0.0)); }
 
                 //generate streamline
                 activeStreamline = CreateStreamline(seed);
                 CompletedStreamlines.Add(activeStreamline);
+
                 /*                    Vertex vertex1 = new Vertex();*/
                 tmesh = InsertStreamline(activeStreamline);
 
@@ -333,7 +347,7 @@ namespace LilyPad.Objects
 
             RETRY:
                 //determine if saturation has been reached
-                if (circles[0].Diameter < DSep * 2) break;
+                if (circles.Count == 0 || circles[0].Diameter < DSep * 2) break;
                 //if (!tmesh.Bounds.Contains(new TriangleNet.Geometry.Point(circles[0].Center.X, circles[0].Center.Y)))
                 //PointContainment containment = boundPolyline.Contains(circles[0].Center, MeshPlane, 0.00001);
                 Point3d centerOnMesh = Mesh.ClosestPoint(circles[0].Center);
@@ -345,7 +359,9 @@ namespace LilyPad.Objects
 
                 //get new seed and check pts
                 seed = circles[0].Center;
+                tmesh = new TriangleNet.Mesh();
             }
+            TriGeom = null;
         }
 
         /// <summary>
@@ -756,6 +772,8 @@ namespace LilyPad.Objects
             for (int i = 0; i < poly.Count; i++)
             {
                 TriGeom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
+                //Add new points into the checkPts list so that the streamline ends if it is too close to another streamline - THIS NEEDS UPDATING FOR MESHS WHICH ARE NOT A ON A PLANE 
+                CheckPts.Add(poly[i]);
             }
             // Create the connectivity between the points in geom
             for (int i = 0; i < poly.Count; i++)
@@ -777,17 +795,18 @@ namespace LilyPad.Objects
         /// <returns>A delaunay triangulation.</returns>
         private TriangleNet.Mesh InsertStreamline(Polyline poly)
         {
+            int ptsStartCount = TriGeom.Points.Count();
 
             // Add the points of the polyline into the geom
             for (int i = 0; i < poly.Count; i++)
             {
                 TriGeom.AddPoint(Math.Round(poly[i].X, 6), Math.Round(poly[i].Y, 6));
             }
-            // Create the connectivity between the points in geom
-            for (int i = 0; i < poly.Count; i++)
-            {
-                TriGeom.AddSegment(i, (i + 1) % poly.Count);
-            }
+            //// Create the connectivity between the points in geom
+            //for (int i = 0; i < poly.Count - 1; i++)
+            //{
+            //    TriGeom.AddSegment(ptsStartCount + i, ptsStartCount+ i + 1);
+            //}
 
             // Create triangulated mesh from input geometry
             var mesh = new TriangleNet.Mesh();

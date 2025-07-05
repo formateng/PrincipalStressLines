@@ -89,7 +89,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.primary;
             }
         }
     }

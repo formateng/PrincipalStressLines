@@ -63,6 +63,16 @@ namespace LilyPad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconCreateDeformationMesh {
+            get {
+                object obj = ResourceManager.GetObject("IconCreateDeformationMesh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconEvaluate {
             get {
                 object obj = ResourceManager.GetObject("IconEvaluate", resourceCulture);
@@ -96,6 +106,16 @@ namespace LilyPad.Properties {
         internal static System.Drawing.Bitmap IconMembraneQuad8 {
             get {
                 object obj = ResourceManager.GetObject("IconMembraneQuad8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconMembraneTri6 {
+            get {
+                object obj = ResourceManager.GetObject("IconMembraneTri6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

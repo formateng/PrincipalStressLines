@@ -27,7 +27,7 @@ namespace LilyPad.Components.Results
             pManager.AddPointParameter("Seed", "S", "Point which the streamline passes through", GH_ParamAccess.item);
             pManager.AddNumberParameter("Step Tolerance", "T", "Size of the step between successive points", GH_ParamAccess.item);
             pManager.AddNumberParameter("Max. Error", "Err", "If value > 0 then an adaptive step procedure is used where the step size is decreased if the estimated integration error is more than the specified value", GH_ParamAccess.item, 0.0);
-            pManager.AddNumberParameter("Seeding Method", "SM", "Seeding strategy used to generate new seeding point: 'Neighbour =1', 'Fill Gap=2'", GH_ParamAccess.item, 1.0);
+            //pManager.AddNumberParameter("Seeding Method", "SM", "Seeding strategy used to generate new seeding point: 'Neighbour =1', 'Fill Gap=2'", GH_ParamAccess.item, 1.0);
             pManager.AddNumberParameter("Seperation", "dSep", "The seperation distance of new seed points", GH_ParamAccess.item);
             pManager.AddNumberParameter("Test Dist.", "dTest", "The distance which a streamline is ended if it is closer than this distance to a existing streamline, this is only applied if the specified value is >0", GH_ParamAccess.item);
         }
@@ -54,7 +54,7 @@ namespace LilyPad.Components.Results
             double iStepSize = 0.0;
             double iMethod = 4; //the core code allows a choice of integration method but as the Runge Kutta 4 method is superior, this method is used by the component
             double iMaxAngle = 0.0;
-            double iStrategy = 0;
+            double iStrategy = 1;
             double iDSep = 0.0;
             double iDTest = 0.0;
 
@@ -62,9 +62,9 @@ namespace LilyPad.Components.Results
             DA.GetData(1, ref iSeed);
             DA.GetData(2, ref iStepSize);
             DA.GetData(3, ref iMaxAngle);
-            DA.GetData(4, ref iStrategy);
-            DA.GetData(5, ref iDSep);
-            DA.GetData(6, ref iDTest);
+            //DA.GetData(4, ref iStrategy);
+            DA.GetData(4, ref iDSep);
+            DA.GetData(5, ref iDTest);
 
             if (objWrapPrinciMesh != null)
                 iPrincipalMesh = objWrapPrinciMesh.Value as PrincipalMesh;

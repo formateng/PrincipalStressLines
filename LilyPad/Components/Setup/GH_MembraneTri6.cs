@@ -114,13 +114,13 @@ namespace LilyPad.Components.Setup
         }
 
         /// Assign component icon
-        //protected override System.Drawing.Bitmap Icon
-        //{
-        //    get
-        //    {
-        //        return Properties.Resources.IconMembraneQuad8;
-        //    }
-        //}
+        protected override System.Drawing.Bitmap Icon
+        {
+            get
+            {
+                return Properties.Resources.IconMembraneTri6;
+            }
+        }
 
         /// Gets the unique ID for the component
         public override Guid ComponentGuid
@@ -133,7 +133,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return GH_Exposure.primary;
+                return GH_Exposure.secondary;
             }
         }
     }

@@ -176,7 +176,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return Properties.Resources.IconMembraneQuad4;
+                return Properties.Resources.IconCreateDeformationMesh;
             }
         }
 
