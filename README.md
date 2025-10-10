@@ -30,26 +30,26 @@ Although LilyPad is provided as open source with an MIT license, the code is dep
 ## Development Tracker
 LilyPad is still under development. This outlines the development progress so far.
 
-+ Field Generation
-  + Vector Field
-    + Implimentation of Tam (2015) field method.
-  + Displacement Field
-    + Tri 3 Elements
-    + Quad 4 Elements
-    + Tri 6 Elements
-    + Quad 8 Elements
-    + Single Component for Standard (Tri 3 and Quad 4) elements.
-    + Allow for axial and bending principle stress in Standard Elements.
-    + Single Component for Higher (Tri 6 and Quad 8) elements.
-    + Allow for axial and bending principle stress in Higher Elements.
-+ Stress Line Generation
-    + Euler Integration
-    + Runge-Kutta 4 Integration
-    + Detect 180 degree flipping
-    + Adaptive stepping
-    + Loop detection
-    + Loop closure
-    + Detection of proximity to other stress lines.
++ 🔳Field Generation
+  + ✅Vector Field
+    + ✅Implimentation of Tam (2015) field method.
+  + ✅Displacement Field
+    + ✅Tri 3 Elements
+    + ✅Quad 4 Elements
+    + ✅Tri 6 Elements
+    + ✅Quad 8 Elements
+    + ✅Single Component for Standard (Tri 3 and Quad 4) elements.
+    + ✅Allow for axial and bending principle stress in Standard Elements.
+    + 🔳Single Component for Higher (Tri 6 and Quad 8) elements.
+    + 🔳Allow for axial and bending principle stress in Higher Elements.
++ ✅Stress Line Generation
+    + ✅Euler Integration
+    + ✅Runge-Kutta 4 Integration
+    + ✅Detect 180 degree flipping
+    + ✅Adaptive stepping
+    + ✅Loop detection
+    + ✅Loop closure
+    + ✅Detection of proximity to other stress lines.
 + Seeding Methods
 
 ## FAQs
