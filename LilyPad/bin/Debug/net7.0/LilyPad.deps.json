@@ -12,7 +12,6 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3",
           "System.Drawing.Common": "7.0.0",
           "System.Resources.Extensions": "9.0.3",
-          "MathNet.Numerics": "4.8.0.0",
           "Triangle": "1.0.0.0"
         },
         "runtime": {
@@ -90,14 +89,6 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
-      "MathNet.Numerics/4.8.0.0": {
-        "runtime": {
-          "MathNet.Numerics.dll": {
-            "assemblyVersion": "4.8.0.0",
-            "fileVersion": "4.8.0.0"
-          }
-        }
-      },
       "Triangle/1.0.0.0": {
         "runtime": {
           "Triangle.dll": {
@@ -197,11 +188,6 @@
       "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
-    },
-    "MathNet.Numerics/4.8.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     },
     "Triangle/1.0.0.0": {
       "type": "reference",

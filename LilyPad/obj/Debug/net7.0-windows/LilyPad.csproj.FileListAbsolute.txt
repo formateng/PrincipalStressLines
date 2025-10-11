@@ -98,7 +98,6 @@ C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-wi
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-windows\System.Formats.Nrbf.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-windows\System.Reflection.Metadata.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-windows\System.Resources.Extensions.dll
-C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-windows\MathNet.Numerics.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net7.0-windows\Triangle.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net7.0-windows\LilyPad.csproj.AssemblyReference.cache
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net7.0-windows\LilyPad.Properties.Resources.resources

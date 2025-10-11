@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Grasshopper.Kernel.Expressions;
+using Rhino.Collections;
 using LilyPad.Objects;
 using LilyPad.Objects.ShapeFunction;
 
 namespace LilyPad.Components.Setup
 {
-    public class GH_MindlinReissnerQuad4 : GH_Component
+    public class GH_MembraneQuad8 : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the GH_MindlinReissnerQuad4 class.
+        /// Initializes a new instance of the GH_MembraneQuad8 class.
         /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_MindlinReissnerQuad4()
-          : base("4 Node Quad Slab", "Quad4Slab",
-              "Transforms Mesh and results into 4-node quad slab elements for principal bending stress line analysis using the Mindlin-Reissner Plate Theory and Bilinear shape functions. ***NOTE THAT***: the rotational axes are defined by the right hand rule",
+        public GH_MembraneQuad8()
+          : base("8 Node Quad Membrane", "Quad8Mem",
+              "Transforms Mesh and results into 8-node quad membrane elements for principal stress line analysis using the theory of in-plane loaded plates and quadratic shape functions",
               "LilyPad", " Setup")
         {
         }
@@ -26,7 +27,9 @@ namespace LilyPad.Components.Setup
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddMeshParameter("Mesh", "M", "Mesh", GH_ParamAccess.item);
-            pManager.AddVectorParameter("Rotations", "φ", "Rotational vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
+            pManager.AddPointParameter("Mid-Nodes", "md", "Mid-node locations as a list of points", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Displacments Corners", "U-c", "Displacement vectors for each mesh vertex in a list sorted in the same order as the mesh vertices", GH_ParamAccess.list);
+            pManager.AddVectorParameter("Displacments Mid-Nodes", "U-md", "Displacement vectors for each mid-node in a list sorted in the same order as the mid-node points", GH_ParamAccess.list);
             pManager.AddNumberParameter("Poisson's ratio", "v", "Poisson's ratio", GH_ParamAccess.item);
         }
 
@@ -38,18 +41,23 @@ namespace LilyPad.Components.Setup
         }
 
         /// <summary>
-        /// Uses the provided mesh to create a series of quad 4 elements
+        /// Uses the provided mesh to create a series of quad 8 elements
+        /// The mid-nodes and mid-node displacments are used for the additional 4 nodes around the perimeter of the element
         /// Assembles list of elements into two principal meshes one for each direction
         /// </summary>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Mesh iMesh = new Mesh();
-            List<Vector3d> iφ = new List<Vector3d>();
+            List<Point3d> iMd = new List<Point3d>();
+            List<Vector3d> iUc = new List<Vector3d>();
+            List<Vector3d> iUmd = new List<Vector3d>();
             double iV = 0.0;
 
             DA.GetData(0, ref iMesh);
-            DA.GetDataList(1, iφ);
-            DA.GetData(2, ref iV);
+            DA.GetDataList(1, iMd);
+            DA.GetDataList(2, iUc);
+            DA.GetDataList(3, iUmd);
+            DA.GetData(4, ref iV);
 
             //________________________________________________________________________________________________________________________
 
@@ -60,21 +68,31 @@ namespace LilyPad.Components.Setup
             for (int i = 0; i < iMesh.Faces.Count; i++)
             {
                 MeshFace face = iMesh.Faces[i];
-
                 int p1 = face[0];
-                int p2 = face[1];
-                int p3 = face[3];
-                int p4 = face[2];
+                int p3 = face[1];
+                int p6 = face[3];
+                int p8 = face[2];
 
                 Point3d point1 = iMesh.Vertices[p1];
-                Point3d point2 = iMesh.Vertices[p2];
                 Point3d point3 = iMesh.Vertices[p3];
-                Point3d point4 = iMesh.Vertices[p4];
+                Point3d point6 = iMesh.Vertices[p6];
+                Point3d point8 = iMesh.Vertices[p8];
+
+                Point3d point2 = (point1 + point3) / 2;
+                Point3d point4 = (point1 + point6) / 2;
+                Point3d point5 = (point3 + point8) / 2;
+                Point3d point7 = (point6 + point8) / 2;
+
+                Point3dList midPoints = new Point3dList(iMd);
+                int p2 = midPoints.ClosestIndex(point2);
+                int p4 = midPoints.ClosestIndex(point4);
+                int p5 = midPoints.ClosestIndex(point5);
+                int p7 = midPoints.ClosestIndex(point7);
 
                 // Fit a plane to the points and find the maximum distance from the plane to the points
                 Plane fitPlane;
                 double maxDeviation;
-                if (Plane.FitPlaneToPoints(new List<Point3d> { point1, point2, point3, point4 }, out fitPlane, out maxDeviation) != 0)
+                if (Plane.FitPlaneToPoints(new List<Point3d> { point1, point3, point6, point8 }, out fitPlane, out maxDeviation) != 0)
                 {
                     AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} could not fit a plane.");
                     return;
@@ -86,23 +104,17 @@ namespace LilyPad.Components.Setup
                     return;
                 }
 
-                //alter vectors so they are in the "mathematical form" rather than the right-hand rule
-                Vector3d U1 = iφ[p1];
-                Vector3d U2 = iφ[p2];
-                Vector3d U3 = iφ[p3];
-                Vector3d U4 = iφ[p4];
-
                 //Create and analyse elements
-                Quad4Element bilinearIsoPara1 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV, false);
+                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV, true);
 
                 //output data
-                bilinearIsoPara1.ChangeDirection(1);
-                sigma1.Add(new Element(bilinearIsoPara1));
+                quadraticIsoPara1.ChangeDirection(1);
+                sigma1.Add(new Element(quadraticIsoPara1));
 
-                Quad4Element bilinearIsoPara2 = new Quad4Element(point1, point2, point3, point4, U1, U2, U3, U4, iV, false);
+                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV, true);
 
-                bilinearIsoPara2.ChangeDirection(2);
-                sigma2.Add(new Element(bilinearIsoPara2));
+                quadraticIsoPara2.ChangeDirection(2);
+                sigma2.Add(new Element(quadraticIsoPara2));
             }
 
             //Creates FieldMesh data for output
@@ -119,28 +131,27 @@ namespace LilyPad.Components.Setup
             DA.SetData(1, oSigma2);
         }
 
-
         /// Assign component icon
         protected override System.Drawing.Bitmap Icon
         {
             get
             {
-                return Properties.Resources.IconSlabQuad4;
+                return Properties.Resources.IconMembraneQuad8;
             }
         }
 
         /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
-            get { return new Guid("78ddf910-f69b-42a1-9255-298eea3ebfcb"); }
+            get { return new Guid("68dde900-f69b-42a1-9255-298eea3ebfcb"); }
         }
 
-        ///Set component to be in the SECOND group of the sub-category
+        /// Set component to be in the FIRST group of the sub-category
         public override GH_Exposure Exposure
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.hidden;
             }
         }
     }

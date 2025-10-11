@@ -101,7 +101,6 @@ C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Sys
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Resources.Extensions.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\System.ValueTuple.dll
-C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\MathNet.Numerics.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Triangle.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.csproj.AssemblyReference.cache
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Debug\net48\LilyPad.Properties.Resources.resources

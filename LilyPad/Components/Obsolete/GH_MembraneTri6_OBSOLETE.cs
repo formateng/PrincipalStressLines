@@ -10,15 +10,15 @@ using LilyPad.Objects.ShapeFunction;
 
 namespace LilyPad.Components.Setup
 {
-    public class GH_MembraneQuad8 : GH_Component
+    public class GH_MembraneTri6 : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the GH_MembraneQuad8 class.
         /// base(Name, Nickname, Description, Folder, SubFolder)
         /// </summary>
-        public GH_MembraneQuad8()
-          : base("8 Node Quad Membrane", "Quad8Mem",
-              "Transforms Mesh and results into 8-node quad membrane elements for principal stress line analysis using the theory of in-plane loaded plates and quadratic shape functions",
+        public GH_MembraneTri6()
+          : base("6 Node Triangle Membrane", "Tri6Mem",
+              "Transforms Mesh and results into 6-node Tri membrane elements for principal stress line analysis using the theory of in-plane loaded plates and quadratic shape functions",
               "LilyPad", " Setup")
         {
         }
@@ -70,48 +70,30 @@ namespace LilyPad.Components.Setup
                 MeshFace face = iMesh.Faces[i];
                 int p1 = face[0];
                 int p3 = face[1];
-                int p6 = face[3];
-                int p8 = face[2];
+                int p6 = face[2];
 
                 Point3d point1 = iMesh.Vertices[p1];
                 Point3d point3 = iMesh.Vertices[p3];
                 Point3d point6 = iMesh.Vertices[p6];
-                Point3d point8 = iMesh.Vertices[p8];
 
                 Point3d point2 = (point1 + point3) / 2;
                 Point3d point4 = (point1 + point6) / 2;
-                Point3d point5 = (point3 + point8) / 2;
-                Point3d point7 = (point6 + point8) / 2;
+                Point3d point5 = (point3 + point6) / 2;
 
                 Point3dList midPoints = new Point3dList(iMd);
                 int p2 = midPoints.ClosestIndex(point2);
                 int p4 = midPoints.ClosestIndex(point4);
                 int p5 = midPoints.ClosestIndex(point5);
-                int p7 = midPoints.ClosestIndex(point7);
 
-                // Fit a plane to the points and find the maximum distance from the plane to the points
-                Plane fitPlane;
-                double maxDeviation;
-                if (Plane.FitPlaneToPoints(new List<Point3d> { point1, point3, point6, point8 }, out fitPlane, out maxDeviation) != 0)
-                {
-                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} could not fit a plane.");
-                    return;
-                }
-
-                if (maxDeviation > 0.01)
-                {
-                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, $"Face {i} is too warped. Plane deviation: {maxDeviation}");
-                    return;
-                }
 
                 //Create and analyse elements
-                Quad8Element quadraticIsoPara1 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV, true);
+                Tri6Element quadraticIsoPara1 = new Tri6Element(point1, point2, point3, point4, point5, point6, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iV, true);
 
                 //output data
                 quadraticIsoPara1.ChangeDirection(1);
                 sigma1.Add(new Element(quadraticIsoPara1));
 
-                Quad8Element quadraticIsoPara2 = new Quad8Element(point1, point2, point3, point4, point5, point6, point7, point8, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iUmd[p7], iUc[p8], iV, true);
+                Tri6Element quadraticIsoPara2 = new Tri6Element(point1, point2, point3, point4, point5, point6, iUc[p1], iUmd[p2], iUc[p3], iUmd[p4], iUmd[p5], iUc[p6], iV, true);
 
                 quadraticIsoPara2.ChangeDirection(2);
                 sigma2.Add(new Element(quadraticIsoPara2));
@@ -136,14 +118,14 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return Properties.Resources.IconMembraneQuad8;
+                return Properties.Resources.IconMembraneTri6;
             }
         }
 
         /// Gets the unique ID for the component
         public override Guid ComponentGuid
         {
-            get { return new Guid("68dde900-f69b-42a1-9255-298eea3ebfcb"); }
+            get { return new Guid("68cce900-f69b-42a1-9255-298eea3ebfcb"); }
         }
 
         /// Set component to be in the FIRST group of the sub-category
@@ -151,7 +133,7 @@ namespace LilyPad.Components.Setup
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.hidden;
             }
         }
     }

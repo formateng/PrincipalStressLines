@@ -48,10 +48,8 @@
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" ExcludeAssets="runtime" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="Triangle">
+
+			       <Reference Include="Triangle">
       <HintPath>..\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Triangle.dll</HintPath>
     </Reference>
   </ItemGroup>
