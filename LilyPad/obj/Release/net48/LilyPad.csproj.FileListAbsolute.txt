@@ -24,7 +24,6 @@ C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\S
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\System.Resources.Extensions.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\System.ValueTuple.dll
-C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\MathNet.Numerics.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\bin\Release\net48\Triangle.dll
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Release\net48\LilyPad.csproj.AssemblyReference.cache
 C:\Users\4Matt\Documents\GitHub\PrincipalStressLines\LilyPad\obj\Release\net48\LilyPad.Properties.Resources.resources
