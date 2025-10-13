@@ -52,6 +52,10 @@
 			       <Reference Include="Triangle">
       <HintPath>..\GitHub\PrincipalStressLines\LilyPad\bin\Debug\net48\Triangle.dll</HintPath>
     </Reference>
+
+			       <Reference Include="Triangle">
+			         <HintPath>Triangle_UnknownOldVersion.dll</HintPath>
+			       </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
