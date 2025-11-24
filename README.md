@@ -31,9 +31,9 @@ Although LilyPad is provided as open source with an MIT license, the code is dep
 ## Development Tracker
 LilyPad is still under development. This outlines the development progress so far.
 
-+ 🔳Field Generation
++ ✅Field Generation
   + ✅Vector Field
-    + ✅Implimentation of Tam (2015) field method.
+    + ✅Implementation of Tam (2015) field method.
   + ✅Displacement Field
     + ✅Tri 3 Elements
     + ✅Quad 4 Elements
@@ -41,8 +41,8 @@ LilyPad is still under development. This outlines the development progress so fa
     + ✅Quad 8 Elements
     + ✅Single Component for Standard (Tri 3 and Quad 4) elements.
     + ✅Allow for axial and bending principle stress in Standard Elements.
-    + 🔳Single Component for Higher (Tri 6 and Quad 8) elements.
-    + 🔳Allow for axial and bending principle stress in Higher Elements.
+    + ✅Single Component for Higher (Tri 6 and Quad 8) elements.
+    + ✅Allow for axial and bending principle stress in Higher Elements.
 + ✅Stress Line Generation
     + ✅Euler Integration
     + ✅Runge-Kutta 4 Integration
@@ -51,6 +51,41 @@ LilyPad is still under development. This outlines the development progress so fa
     + ✅Loop detection
     + ✅Loop closure
     + ✅Detection of proximity to other stress lines.
+    + 🔳 Listen for ESC press and break loop
+    + 🔳 Runtime Optimisation
+    + 🔳 Run Stress Line Component as parallel for multiple seed inputs
 + Seeding Methods
+    + ✅Implement Neighbour Seedind Method
+    + 🔳Implement Farthest Point Seedin Method
+      + 🔳 Updated TriangleNET package and methods based on this
+      + 🔳 Create implementation of this method for non-planar meshes
+    + 🔳 Listen for ESC press and break loop
+    + 🔳 Runtime Optimisation
 
 ## FAQs
+**Where do I start?**
+  - Download the example files from Releases (or Food4Rhino) and look through what can be done?
+
+**Can this only be used with Karamba or GSA?**
+  - No, this can in theory work with any Finite Element Analysis software. The difficulty is with getting the neccessary data into Grasshopper. We'd recommend that you use the GSA example files as a start and see how to get your results into the same format.
+
+**What's a principal stress line?**
+  - If you're unaware of stress lines the best place to start is [Mohr's circle](https://en.wikipedia.org/wiki/Mohr%27s_circle#Finding_principal_normal_stresses).
+
+**How does this compare with Karamba's Line Results Component**
+  - The major benefit of this plugin is that an entire field of evenly spaced stresslines can be generated in one go with the user needing to pick seeding points. Additionally, using the higher order elements generally gives cleaner results. But currently LilyPad is slower at producing stresslines.
+
+**Why do stress lines stop when they get close to others?**
+  - This is done to create clear images. If you would like your stress lines to always continue tell they meet the edge or loop then set dTest to zero.
+
+**Why doesn't this work everytime?**
+  - We're releasing this as a pre-release before we've fixed all the bugs so that others can start to use the tool. As we continue to develop the plugin we'll release updates on the Package Manager.
+
+**Is LilyPad Avaliable for Rhino 7?**
+  - At present LilyPad is only published to the Rhino 8 Package Manager.
+
+**There's so many ways to generate the stress lines, which is best for my case?**
+  - This is impossible to say and will depend on your geometry, loading and how long you want the computer to run for. If you can use higher order elements in your analysis software this generally gives the cleanest results as the principle vector field is smoothest.
+
+**Why do I need to input the poison's ratio**
+  - Although the effect can be small, it does have a influence on the mathematics.
