@@ -75,6 +75,9 @@ LilyPad is still under development. This outlines the development progress so fa
 **How does this compare with Karamba's Line Results Component**
   - The major benefit of this plugin is that an entire field of evenly spaced stresslines can be generated in one go with the user needing to pick seeding points. Additionally, using the higher order elements generally gives cleaner results. But currently LilyPad is slower at producing stresslines.
 
+**Should I create in-plane or bending principle stress lines?**
+ - If your interested in effects resulting from axial forces inside the material then use in-plane stress lines (for example, forces in shear walls), if you're interested in effects resulting from bending forces then use bending stress lines (for example, optimal beam placement in a slab).
+
 **Why do stress lines stop when they get close to others?**
   - This is done to create clear images. If you would like your stress lines to always continue tell they meet the edge or loop then set dTest to zero.
 
