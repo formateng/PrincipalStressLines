@@ -3,11 +3,13 @@
 # LilyPad
 A Grasshopper plug-in which generates principal stress lines for optimised plate, slab, and shell structures.
 
-There are two main advantages to this plugin over other stress line modelling methods (e.g. Karamba's Line Results Component): The ability to use the displacment field from higher order elements for improved accuracing of the principal stress directions and the usage of seeding methods to automate the process of selecting stress lines which are evening spaced creating a cleaner plot.
+There are two main advantages to this plugin over other stress line modelling methods (e.g. Karamba's Line Results Component): The ability to use the displacement field from higher order elements for improved accuracy of the principal stress directions and the usage of seeding methods to automate the process of selecting stress lines which are evening spaced creating a cleaner plot.
 
-The plug-in orginated from the [Master's Thesis of Matthew Church at TU Delft](https://repository.tudelft.nl/record/uuid:b35b0984-1fbb-4f18-81d3-a01a8c9c8060) conducted between 2020 and 2022. This original work explored the best practices for generating highly accurate and evenly spaced stress lines on planar slab and plate geometries. Format Engineers have developed the plugin futher by enabling stress lines to be generated on non-planar meshes, developed the displacement field to work with triangular faces, and improved the user experience to make it more intuitive.
+The plug-in originated from the [Master's Thesis of Matthew Church at TU Delft](https://repository.tudelft.nl/record/uuid:b35b0984-1fbb-4f18-81d3-a01a8c9c8060) conducted between 2020 and 2022. This original work explored the best practices for generating highly accurate and evenly spaced stress lines on planar slab and plate geometries. Format Engineers have developed the plugin further by enabling stress lines to be generated on non-planar meshes, developed the displacement field to work with triangular faces, and improved the user experience to make it more intuitive.
 
 <img width="200" height="200" alt="Animation of Stress lines on a Lily Pad Shape" src="https://github.com/user-attachments/assets/a7686f8a-f038-4c99-a989-b3f73f759a08" />
+<img width="200" height="200" alt="Animation of Stress lines from example 0" src="https://github.com/user-attachments/assets/78f1a2c7-5809-48ac-8e8b-e8dff1f92107" />
+
 
 ### Overview
 The process of generating the stress lines is broken down into several steps to allow the user to control the method for generating the stress lines. The key parts to this are in determining how the field which generates the stress vectors is created, and the method for seeding the new start points of stress lines.
